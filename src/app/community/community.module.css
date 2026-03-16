@@ -1,0 +1,132 @@
+.feed {
+  padding: 2rem 0;
+  min-height: calc(100vh - 4.5rem);
+}
+
+.header {
+  margin-bottom: 3rem;
+  animation: slideUp 0.6s ease-out;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 850;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+}
+
+.filterBar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.filterChip {
+  padding: 0.6rem 1.25rem;
+  background: white;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.filterChip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.activeChip {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 700px;
+}
+
+.postCard {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.postCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-full);
+  background: var(--primary-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.authorName {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+.authorDept {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.postContent {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+}
+
+.postActions {
+  display: flex;
+  gap: 2rem;
+  border-top: 1px solid var(--surface-border);
+  padding-top: 1.25rem;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.action:hover {
+  color: var(--primary);
+}

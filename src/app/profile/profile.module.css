@@ -1,0 +1,120 @@
+.profile {
+  padding: 4rem 0;
+  min-height: calc(100vh - 4.5rem);
+}
+
+.profileWrapper {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 3rem;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profileCard {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--surface-border);
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.avatarLarge {
+    width: 8rem;
+    height: 8rem;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0 auto 2rem;
+    border: 4px solid var(--primary-glow);
+}
+
+.name {
+    font-size: 1.75rem;
+    font-weight: 850;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.deptInfo {
+    font-weight: 700;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.bio {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.contentCard {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--surface-border);
+    padding: 2.5rem;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.linkItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--surface-border);
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.linkItem:hover {
+    border-color: var(--primary);
+    background: white;
+    transform: translateX(5px);
+}
+
+.linkInfo h4 {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.linkInfo p {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+@media (max-width: 1024px) {
+    .profileWrapper {
+        grid-template-columns: 1fr;
+    }
+}

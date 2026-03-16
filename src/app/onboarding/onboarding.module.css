@@ -1,0 +1,147 @@
+.onboardingWrapper {
+    min-height: 100vh;
+    padding: 6rem 1rem;
+    background: radial-gradient(circle at 10% 10%, hsla(112, 100%, 19%, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, hsla(216, 100%, 15%, 0.05) 0%, transparent 40%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-family: var(--font-display);
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.header p {
+    color: var(--muted);
+    font-size: 1.125rem;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.step {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.step.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 0 20px rgba(11, 61, 44, 0.3);
+}
+
+.line {
+    width: 3rem;
+    height: 2px;
+    background: var(--surface-border);
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    width: 100%;
+    box-shadow: var(--shadow-xl);
+    backdrop-filter: blur(10px);
+}
+
+.stepContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.iconCircle {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: var(--primary-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+.interestGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-width: 600px;
+}
+
+.interestChip {
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-full);
+    background: var(--background);
+    border: 1px solid var(--surface-border);
+    color: var(--foreground);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.interestChip:hover {
+    border-color: var(--primary);
+    background: var(--primary-glow);
+}
+
+.activeLine {
+    background: var(--primary);
+}
+
+.selectedChip {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 4px 12px rgba(11, 61, 44, 0.2);
+}
+
+.footer {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.nextBtn {
+    padding: 0.8rem 3rem;
+    font-size: 1.1rem;
+}
+
+.nextBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.skipLink {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
