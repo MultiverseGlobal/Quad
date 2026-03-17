@@ -24,7 +24,7 @@ export async function completeOnboarding(formData: FormData) {
 
     if (error) {
         console.error('Onboarding Error:', error);
-        return;
+        return { error: error.message };
     }
 
     revalidatePath('/dashboard');

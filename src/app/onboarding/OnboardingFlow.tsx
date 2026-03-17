@@ -1,8 +1,6 @@
-'use client';
-
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Rocket, Sparkles, GraduationCap, Users } from 'lucide-react';
+import { Rocket, Sparkles, GraduationCap, Users, AlertCircle } from 'lucide-react';
 import styles from './onboarding.module.css';
 import { completeOnboarding } from './actions';
 
@@ -16,6 +14,8 @@ export default function OnboardingFlow() {
     const [step, setStep] = useState(1);
     const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
     const [year, setYear] = useState('2024');
+    const [isPending, startTransition] = useTransition();
+    const [error, setError] = useState<string | null>(null);
 
     const toggleInterest = (interest: string) => {
         setSelectedInterests(prev => 
@@ -26,13 +26,21 @@ export default function OnboardingFlow() {
     };
 
     const handleNext = () => {
-        if (step < 3) setStep(step + 1);
-        else {
+        if (step < 3) {
+            setStep(step + 1);
+            setError(null);
+        } else {
             // Final step: Submit
-            const formData = new FormData();
-            formData.append('interests', JSON.stringify(selectedInterests));
-            formData.append('gradYear', year);
-            completeOnboarding(formData);
+            setError(null);
+            startTransition(async () => {
+                const formData = new FormData();
+                formData.append('interests', JSON.stringify(selectedInterests));
+                formData.append('gradYear', year);
+                const result = await completeOnboarding(formData);
+                if (result?.error) {
+                    setError(result.error);
+                }
+            });
         }
     };
 
@@ -56,6 +64,12 @@ export default function OnboardingFlow() {
 
             <div className={styles.card}>
                 <div className={styles.stepContent}>
+                    {error && (
+                        <div style={{ padding: '1rem', background: '#fee2e2', color: '#b91c1c', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 600 }}>
+                            <AlertCircle size={18} />
+                            {error}
+                        </div>
+                    )}
                     {step === 1 && (
                         <>
                             <div className={styles.iconCircle}><Sparkles size={32} /></div>
@@ -132,10 +146,10 @@ export default function OnboardingFlow() {
                     <Button 
                         onClick={handleNext} 
                         className={styles.nextBtn}
-                        disabled={step === 1 && selectedInterests.length < 3}
+                        disabled={(step === 1 && selectedInterests.length < 3) || isPending}
                     >
-                        {step === 3 ? "Complete Onboarding" : "Continue"}
-                        {step === 3 ? <Rocket size={18} style={{ marginLeft: '0.5rem' }} /> : <Rocket size={18} style={{ marginLeft: '0.5rem' }} />}
+                        {isPending ? "Finalizing..." : step === 3 ? "Complete Onboarding" : "Continue"}
+                        {!isPending && <Rocket size={18} style={{ marginLeft: '0.5rem' }} />}
                     </Button>
                 </div>
             </div>
