@@ -4,7 +4,7 @@ import styles from './profile.module.css';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { User, Mail, GraduationCap, Link as LinkIcon, Instagram, Twitter, ExternalLink, ShoppingBag } from 'lucide-react';
+import { User, Mail, GraduationCap, Link as LinkIcon, Instagram, Twitter, ExternalLink, ShoppingBag, Sparkles } from 'lucide-react';
 
 export default async function ProfilePage() {
     const supabase = await createClient();

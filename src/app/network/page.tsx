@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/Button';
 import styles from './network.module.css';
-import { Users, Search, MapPin, UserPlus, UserMinus, GraduationCap } from 'lucide-react';
+import { Users, Search, MapPin, UserPlus, UserMinus, GraduationCap, Sparkles } from 'lucide-react';
 import { toggleFollow } from './actions';
 import { redirect } from 'next/navigation';
 
