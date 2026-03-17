@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/Button';
 import { updateProfile } from '../actions';
 import styles from '../profile.module.css';
 
-export default async function EditProfilePage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function EditProfilePage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+    const params = await searchParams;
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -32,9 +33,9 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
                             Refine your professional identity on the Quad campus network.
                         </p>
 
-                        {searchParams?.error && (
+                        {params?.error && (
                             <div style={{ padding: '1rem', background: '#ff000010', color: 'var(--error)', borderRadius: 'var(--radius-lg)', marginBottom: '2rem', border: '1px solid #ff000020', fontWeight: 600, textAlign: 'center' }}>
-                                {searchParams.error}
+                                {params.error}
                             </div>
                         )}
                         <form action={updateProfile} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -125,7 +126,9 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
 
                             <div style={{ display: 'flex', gap: '1.25rem', marginTop: '1.5rem' }}>
                                 <Button type="submit" size="large" style={{ flex: 1 }}>Save Professional Profile</Button>
-                                <Button variant="ghost" type="button" onClick={() => window.history.back()} style={{ flex: 1, border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-lg)' }}>Cancel</Button>
+                                <Link href="/profile" style={{ flex: 1 }}>
+                                    <Button variant="ghost" type="button" style={{ width: '100%', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-lg)' }}>Cancel</Button>
+                                </Link>
                             </div>
                         </form>
                     </div>

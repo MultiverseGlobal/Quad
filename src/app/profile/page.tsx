@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { User, Mail, GraduationCap, Link as LinkIcon, Instagram, Twitter, ExternalLink, ShoppingBag, Sparkles } from 'lucide-react';
+import { Avatar } from '@/components/ui/Avatar';
 
 export default async function ProfilePage() {
     const supabase = await createClient();
@@ -28,9 +29,12 @@ export default async function ProfilePage() {
                     <div className={styles.profileWrapper}>
                         <aside className={`${styles.sidebar} animate-slide-up stagger-1`}>
                             <div className={styles.profileCard}>
-                                <div className={styles.avatarLarge}>
-                                    {profile?.full_name?.[0] || user.email?.[0]?.toUpperCase()}
-                                </div>
+                                <Avatar 
+                                    name={profile?.full_name} 
+                                    size="xl" 
+                                    status="academic"
+                                    style={{ margin: '0 auto 2rem' }}
+                                />
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
                                     <h1 className={styles.name}>{profile?.full_name || 'Scholar'}</h1>
                                     <Sparkles size={20} className="text-secondary" />

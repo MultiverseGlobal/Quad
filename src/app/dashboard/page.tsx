@@ -13,8 +13,10 @@ import {
     LogOut,
     Bell,
     TrendingUp,
-    Users
+    Users,
+    Sparkles
 } from 'lucide-react';
+import { Avatar } from '@/components/ui/Avatar';
 
 export default async function DashboardPage() {
     const supabase = await createClient();
@@ -55,9 +57,16 @@ export default async function DashboardPage() {
             <div className={styles.dashboard}>
                 <div className="container">
                     <header className={styles.header}>
-                        <div className={styles.welcome}>
-                            <h1>Welcome back, {profile?.full_name?.split(' ')[0] || 'Scholar'}</h1>
-                            <p>{profile?.department || 'Veritas University Student'} • Level {profile?.level || '100L'}</p>
+                        <div className={styles.welcome} style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                            <Avatar name={profile?.full_name} size="large" status="academic" />
+                            <div>
+                                <h1 style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--primary)', fontFamily: 'var(--font-display)', marginBottom: '0.25rem' }}>
+                                    Welcome back, {profile?.full_name?.split(' ')[0] || 'Scholar'}
+                                </h1>
+                                <p style={{ fontSize: '1.1rem', color: 'var(--muted)', fontWeight: 500 }}>
+                                    {profile?.department || 'Veritas University Student'} • Level {profile?.level || '100L'}
+                                </p>
+                            </div>
                         </div>
                         <div className={styles.actions}>
                             <Button variant="ghost" className={styles.notifBtn}>
@@ -78,7 +87,7 @@ export default async function DashboardPage() {
                                         <div style={{ width: '100%', textAlign: 'left' }}>
                                             <p style={{ fontSize: '1.25rem', fontStyle: 'italic', fontWeight: 500, color: 'var(--primary)', lineHeight: 1.5 }}>"{recentPost.data.content}"</p>
                                             <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifySelf: 'center', color: 'white', fontSize: '0.75rem', fontWeight: 800 }}>V</div>
+                                                <Avatar name="Veritas Scholar" size="small" />
                                                 <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: 600 }}>Fresh in {profile?.department}</p>
                                             </div>
                                         </div>
@@ -107,8 +116,8 @@ export default async function DashboardPage() {
                                                     <h4 style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '1.1rem' }}>{job.title}</h4>
                                                     <p style={{ fontSize: '0.875rem', color: 'var(--muted)', fontWeight: 500 }}>{job.company} • Verified Opportunity</p>
                                                 </div>
-                                                <Link href="/opportunities">
-                                                    <Button variant="outline" size="small">View Details</Button>
+                                                <Link href={`/opportunities/${job.id}`}>
+                                                    <Button variant="outline" size="small">View Brief</Button>
                                                 </Link>
                                             </div>
                                         ))

@@ -5,14 +5,17 @@ import styles from './network.module.css';
 import { Users, Search, MapPin, UserPlus, UserMinus, GraduationCap, Sparkles } from 'lucide-react';
 import { toggleFollow } from './actions';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import { Avatar } from '@/components/ui/Avatar';
 
-export default async function NetworkPage({ searchParams }: { searchParams: { query?: string } }) {
+export default async function NetworkPage({ searchParams }: { searchParams: Promise<{ query?: string }> }) {
+    const params = await searchParams;
+    const query = params.query || '';
+    
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
 
-    if (!user) return redirect('/auth/login');
-
-    const query = searchParams.query || '';
+    if (!currentUser) return redirect('/auth/login');
 
     // Fetch all profiles except current user
     let profilesQuery = supabase
@@ -67,21 +70,25 @@ export default async function NetworkPage({ searchParams }: { searchParams: { qu
                                         className={`${styles.profileCard} animate-slide-up`}
                                         style={{ animationDelay: `${index * 0.05}s` }}
                                     >
-                                        <div className={styles.avatar}>
-                                            {p.full_name?.[0] || 'S'}
-                                        </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
-                                            <h3 className={styles.name}>{p.full_name}</h3>
-                                            <Sparkles size={14} className="text-secondary" />
-                                        </div>
-                                        <p className={styles.dept}>{p.department}</p>
-                                        
-                                        <div className={styles.meta}>
-                                            <div className={styles.metaItem}>
-                                                <GraduationCap size={14} />
-                                                <span>{p.level || '100L'} Scholar</span>
+                                        <Link href={`/profile/${p.id}`} style={{ textDecoration: 'none', color: 'inherit', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Avatar 
+                                                name={p.full_name} 
+                                                size="medium" 
+                                                status="academic"
+                                            />
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
+                                                <h3 className={styles.name}>{p.full_name}</h3>
+                                                <Sparkles size={14} className="text-secondary" />
                                             </div>
-                                        </div>
+                                            <p className={styles.dept}>{p.department}</p>
+                                            
+                                            <div className={styles.meta}>
+                                                <div className={styles.metaItem}>
+                                                    <GraduationCap size={14} />
+                                                    <span>{p.level || '100L'} Scholar</span>
+                                                </div>
+                                            </div>
+                                        </Link>
 
                                         <div className={styles.actions} style={{ width: '100%' }}>
                                             <form action={toggleFollow.bind(null, p.id, isFollowing)}>

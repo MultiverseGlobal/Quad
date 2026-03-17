@@ -8,26 +8,48 @@ import {
     MessageCircle, 
     Share2, 
     Plus,
-    Search,
-    Sparkles
+    Sparkles,
+    Search
 } from 'lucide-react';
+import { Avatar } from '@/components/ui/Avatar';
+import RealtimeFeed from './RealtimeFeed';
 
-export default async function CommunityPage() {
+export default async function CommunityPage({ searchParams }: { searchParams: Promise<{ query?: string, category?: string }> }) {
+    const params = await searchParams;
+    const query = params.query || '';
+    const category = params.category || '';
+    
     const supabase = await createClient();
     
-    // Fetch posts with author profile information
-    const { data: posts, error } = await supabase
+    // Build the query
+    let postsQuery = supabase
         .from('posts')
         .select(`
             *,
-            profiles:author_id (
+            profiles!inner (
                 full_name,
                 department
             )
         `)
         .order('created_at', { ascending: false });
 
-    const categories = ["All Feed", "Computer Science", "Economics", "Law", "Campus Events", "Marketplace"];
+    if (query) {
+        postsQuery = postsQuery.ilike('content', `%${query}%`);
+    }
+
+    if (category && category !== 'All Feed') {
+        // Special case for Campus Events if it's not a department
+        if (category === 'Campus Events') {
+             // For now, let's just search for "event" in content as a fallback or if we had a category field
+             postsQuery = postsQuery.ilike('content', '%event%');
+        } else {
+             postsQuery = postsQuery.eq('profiles.department', category);
+        }
+    }
+
+    const { data: posts } = await postsQuery;
+
+    const categories = ["All Feed", "Computer Science", "Economics", "Law", "Mass Communication"];
     
     return (
         <>
@@ -35,69 +57,68 @@ export default async function CommunityPage() {
             <div className={styles.feed}>
                 <div className="container">
                     <header className={styles.header}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                            <h1>Community Pulse</h1>
-                            <Link href="/community/new">
-                                <Button>
-                                    <Plus size={20} />
-                                    Start a Discussion
-                                </Button>
-                            </Link>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
+                            <div>
+                                <h1>Community Pulse</h1>
+                                <p style={{ color: 'var(--muted)', fontWeight: 500 }}>Stay connected with the heartbeat of Veritas University.</p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                                <form action="/community" className={styles.searchWrapper}>
+                                    <Search className={styles.searchIcon} size={18} />
+                                    <input 
+                                        name="query" 
+                                        type="text" 
+                                        placeholder="Search discussions..." 
+                                        className={styles.searchInput}
+                                        defaultValue={query}
+                                    />
+                                    {category && <input type="hidden" name="category" value={category} />}
+                                </form>
+                                <Link href="/community/new">
+                                    <Button size="large">
+                                        <Plus size={20} />
+                                        Launch Discussion
+                                    </Button>
+                                </Link>
+                            </div>
                         </div>
                         
                         <div className={styles.filterBar}>
                             {categories.map((cat, i) => (
-                                <div key={i} className={`${styles.filterChip} ${i === 0 ? styles.activeChip : ''}`}>
-                                    {cat}
-                                </div>
+                                <Link 
+                                    key={i} 
+                                    href={`/community?category=${encodeURIComponent(cat)}${query ? `&query=${encodeURIComponent(query)}` : ''}`}
+                                    className={styles.categoryLink}
+                                >
+                                    <div className={`${styles.filterChip} ${category === cat || (!category && cat === 'All Feed') ? styles.activeChip : ''}`}>
+                                        {cat}
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     </header>
 
                     <div className={styles.postList}>
                         {posts && posts.length > 0 ? (
-                            posts.map((post, index) => (
-                                <article 
-                                    key={post.id} 
-                                    className={`${styles.postCard} animate-slide-up`}
-                                    style={{ animationDelay: `${index * 0.1}s` }}
-                                >
-                                    <div className={styles.authorInfo}>
-                                        <div className={styles.avatar}>
-                                            {post.profiles?.full_name?.[0] || 'U'}
-                                        </div>
-                                        <div>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                                <div className={styles.authorName}>{post.profiles?.full_name || 'Anonymous Student'}</div>
-                                                <Sparkles size={14} className="text-secondary" />
-                                            </div>
-                                            <div className={styles.authorDept}>{post.profiles?.department || 'Verified Scholar'}</div>
-                                        </div>
-                                    </div>
-                                    <div className={styles.postContent}>
-                                        {post.content}
-                                    </div>
-                                    <div className={styles.postActions}>
-                                        <Button variant="ghost" size="small" className={styles.action}>
-                                            <Heart size={18} />
-                                            0
-                                        </Button>
-                                        <Button variant="ghost" size="small" className={styles.action}>
-                                            <MessageCircle size={18} />
-                                            0
-                                        </Button>
-                                        <Button variant="ghost" size="small" className={styles.action} style={{ marginLeft: 'auto' }}>
-                                            <Share2 size={18} />
-                                            Share
-                                        </Button>
-                                    </div>
-                                </article>
-                            ))
+                            <RealtimeFeed initialPosts={posts as any} />
                         ) : (
-                            <div className={styles.postCard} style={{ textAlign: 'center', padding: '4rem' }}>
-                                <MessageCircle size={48} style={{ margin: '0 auto 1.5rem', opacity: 0.2 }} />
-                                <h3 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>The feed is quiet...</h3>
-                                <p style={{ color: 'var(--muted)' }}>Be the first to start a conversation in your university community.</p>
+                            <div className={styles.postCard} style={{ textAlign: 'center', padding: '5rem 2rem' }}>
+                                <div style={{ display: 'inline-flex', padding: '1.5rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-xl)', color: 'var(--muted)', marginBottom: '1.5rem' }}>
+                                    <MessageCircle size={48} />
+                                </div>
+                                <h3 style={{ color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '1.5rem', fontWeight: 800 }}>
+                                    {query || (category && category !== 'All Feed') ? 'No discussions found' : 'The feed is quiet...'}
+                                </h3>
+                                <p style={{ color: 'var(--muted)', maxWidth: '400px', margin: '0 auto', fontSize: '1.1rem' }}>
+                                    {query || (category && category !== 'All Feed') 
+                                        ? 'Try adjusting your search terms or category filter to find what you are looking for.' 
+                                        : 'Be the first to start a conversation and inspire your university community.'}
+                                </p>
+                                {(query || (category && category !== 'All Feed')) && (
+                                    <Link href="/community" style={{ marginTop: '2rem', display: 'inline-block' }}>
+                                        <Button variant="outline">Clear All Filters</Button>
+                                    </Link>
+                                )}
                             </div>
                         )}
                     </div>
