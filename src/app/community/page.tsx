@@ -8,7 +8,8 @@ import {
     MessageCircle, 
     Share2, 
     Plus,
-    Search
+    Search,
+    Sparkles
 } from 'lucide-react';
 
 export default async function CommunityPage() {
