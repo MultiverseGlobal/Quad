@@ -36,10 +36,10 @@ export default function SignupPage({ searchParams }: { searchParams: { error?: s
                         <label className={styles.label}>Major Department</label>
                         <select name="department" className={styles.input} required style={{ appearance: 'none' }}>
                             <option value="">Select your department</option>
-                            <option value="CSC">Computer Science</option>
-                            <option value="ECO">Economics</option>
-                            <option value="LAW">Law</option>
-                            <option value="MCN">Mass Communication</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Law">Law</option>
+                            <option value="Mass Communication">Mass Communication</option>
                         </select>
                     </div>
 

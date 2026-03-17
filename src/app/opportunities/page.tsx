@@ -3,14 +3,29 @@ import { Button } from '@/components/ui/Button';
 import styles from './opportunities.module.css';
 import { createClient } from '@/lib/supabase/server';
 import { Search, MapPin, Clock, DollarSign, Briefcase } from 'lucide-react';
+import Link from 'next/link';
 
-export default async function OpportunitiesPage() {
+export default async function OpportunitiesPage({ searchParams }: { searchParams: { query?: string, type?: string } }) {
     const supabase = await createClient();
     
-    const { data: jobs, error } = await supabase
+    const query = searchParams.query || '';
+    const typeFilter = searchParams.type || 'All';
+
+    let baseQuery = supabase
         .from('opportunities')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .select('*');
+
+    if (query) {
+        baseQuery = baseQuery.or(`title.ilike.%${query}%,company.ilike.%${query}%,description.ilike.%${query}%`);
+    }
+
+    if (typeFilter !== 'All') {
+        baseQuery = baseQuery.eq('type', typeFilter);
+    }
+
+    const { data: jobs, error } = await baseQuery.order('created_at', { ascending: false });
+
+    const categories = ['All', 'Internship', 'Job', 'Gig', 'Event'];
 
     return (
         <>
@@ -18,15 +33,35 @@ export default async function OpportunitiesPage() {
             <div className={styles.opportunities}>
                 <div className="container">
                     <header className={styles.header}>
-                        <h1 className="animate-slide-up">Opportunity Board</h1>
-                        <p className="animate-slide-up stagger-1">Find the perfect launchpad for your career while you study.</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '2rem' }}>
+                            <div>
+                                <h1 className="animate-slide-up">Opportunity Board</h1>
+                                <p className="animate-slide-up stagger-1">Find the perfect launchpad for your career while you study.</p>
+                            </div>
+                            <Link href="/opportunities/new">
+                                <Button>Post Opportunity</Button>
+                            </Link>
+                        </div>
                         
-                        <div className={`${styles.searchBox} animate-slide-up stagger-2`}>
-                            <input type="text" className={styles.searchInput} placeholder="Search by role, company, or keywords..." />
-                            <Button>
-                                <Search size={20} />
-                                Find Jobs
-                            </Button>
+                        <div className={`${styles.filterArea} animate-slide-up stagger-2`}>
+                            <form className={styles.searchBox}>
+                                <input name="query" type="text" defaultValue={query} className={styles.searchInput} placeholder="Search positions..." />
+                                <Button type="submit">
+                                    <Search size={20} />
+                                </Button>
+                            </form>
+
+                            <div className={styles.tabs}>
+                                {categories.map(cat => (
+                                    <Link 
+                                        key={cat} 
+                                        href={`/opportunities?type=${cat}${query ? `&query=${query}` : ''}`}
+                                        className={`${styles.tab} ${typeFilter === cat ? styles.activeTab : ''}`}
+                                    >
+                                        {cat}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </header>
 
@@ -39,9 +74,11 @@ export default async function OpportunitiesPage() {
                                     <div className={styles.companyName}>{job.company}</div>
                                     
                                     <div className={styles.tags}>
-                                        <div className={styles.tag}><MapPin size={12} /> Remote</div>
-                                        <div className={styles.tag}><Clock size={12} /> {job.type}</div>
-                                        <div className={styles.tag}><DollarSign size={12} /> Competitive</div>
+                                        <div className={`${styles.tag} ${styles[job.type?.toLowerCase() || 'gig']}`}>
+                                            {job.type || 'Gig'}
+                                        </div>
+                                        <div className={styles.tag}><MapPin size={12} /> Campus</div>
+                                        <div className={styles.tag}><Clock size={12} /> Recent</div>
                                     </div>
 
                                     <div style={{ marginTop: 'auto' }}>

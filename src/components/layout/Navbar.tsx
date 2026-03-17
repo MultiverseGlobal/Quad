@@ -19,6 +19,7 @@ export async function Navbar() {
 
                 <div className={styles.navLinks}>
                     <Link href="/community" className={styles.link}>Feed</Link>
+                    <Link href="/network" className={styles.link}>Network</Link>
                     <Link href="/opportunities" className={styles.link}>Opportunities</Link>
                     <Link href="/profile" className={styles.link}>Marketplace</Link>
                 </div>

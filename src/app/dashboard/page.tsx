@@ -38,7 +38,6 @@ export default async function DashboardPage() {
         supabase
             .from('posts')
             .select('*')
-            .eq('community_id', profile?.department_id || null) // Assuming department_id soon
             .order('created_at', { ascending: false })
             .limit(1)
             .single(),
