@@ -4,6 +4,7 @@ import styles from './Navbar.module.css';
 import { GraduationCap, User as UserIcon } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { signOut } from '@/app/auth/actions';
+import Link from 'next/link';
 
 export async function Navbar() {
     const supabase = await createClient();
