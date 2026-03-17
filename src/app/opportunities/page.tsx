@@ -68,7 +68,11 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                     <div className={styles.jobGrid}>
                         {jobs && jobs.length > 0 ? (
                             jobs.map((job, i) => (
-                                <div key={i} className={`${styles.jobCard} animate-slide-up stagger-${(i % 3) + 1}`}>
+                                <div 
+                                    key={i} 
+                                    className={`${styles.jobCard} animate-slide-up`}
+                                    style={{ animationDelay: `${i * 0.05}s` }}
+                                >
                                     <div className={styles.companyLogo}>{job.company?.[0] || 'O'}</div>
                                     <h3 className={styles.jobTitle}>{job.title}</h3>
                                     <div className={styles.companyName}>{job.company}</div>
@@ -77,12 +81,12 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                                         <div className={`${styles.tag} ${styles[job.type?.toLowerCase() || 'gig']}`}>
                                             {job.type || 'Gig'}
                                         </div>
-                                        <div className={styles.tag}><MapPin size={12} /> Campus</div>
-                                        <div className={styles.tag}><Clock size={12} /> Recent</div>
+                                        <div className={styles.tag}><MapPin size={14} /> Campus</div>
+                                        <div className={styles.tag}><DollarSign size={14} /> Competitive</div>
                                     </div>
 
                                     <div style={{ marginTop: 'auto' }}>
-                                        <Button variant="ghost" style={{ width: '100%', border: '1px solid var(--surface-border)' }}>Apply Now</Button>
+                                        <Button variant="outline" style={{ width: '100%' }}>View Details & Apply</Button>
                                     </div>
                                 </div>
                             ))

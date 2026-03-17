@@ -1,6 +1,7 @@
 .opportunities {
-  padding: 2rem 0;
-  min-height: calc(100vh - 4.5rem);
+  padding: 8rem 0 4rem;
+  min-height: 100vh;
+  background: radial-gradient(circle at 0% 0%, hsla(212, 100%, 15%, 0.02) 0%, transparent 40%);
 }
 
 .header {
@@ -8,10 +9,12 @@
 }
 
 .header h1 {
-  font-size: 2.5rem;
-  font-weight: 850;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 900;
   color: var(--primary);
   margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
 }
 
 .header p {
@@ -37,19 +40,20 @@
 .searchInput {
     flex: 1;
     padding: 0.85rem 1.25rem;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     border: 1px solid var(--surface-border);
     background: var(--surface);
     color: var(--foreground);
     font-size: 1rem;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    font-weight: 500;
 }
 
 .searchInput:focus {
     outline: none;
     border-color: var(--primary);
-    background: var(--background);
-    box-shadow: 0 0 0 4px var(--primary-glow);
+    box-shadow: 0 0 0 3px var(--border-focus);
 }
 
 .tabs {
@@ -94,20 +98,22 @@
 }
 
 .jobCard {
-  background: white;
-  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--surface-border);
-  padding: 2rem;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
 }
 
 .jobCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary);
+  border-color: hsla(212, 100%, 15%, 0.1);
 }
 
 .postCard {
@@ -127,30 +133,38 @@
 }
 
 .companyLogo {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: var(--radius-md);
-  background: var(--background);
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
-  font-weight: 800;
-  color: var(--primary);
-  border: 1px solid var(--surface-border);
+  margin-bottom: 2rem;
+  font-weight: 900;
+  color: white;
+  border: 4px solid var(--surface);
+  box-shadow: 0 8px 20px -4px var(--primary-glow);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
 }
 
 .jobTitle {
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--primary);
   margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 .companyName {
   font-weight: 600;
   color: var(--secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .tags {

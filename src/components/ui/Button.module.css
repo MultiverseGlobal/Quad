@@ -6,44 +6,45 @@
     border-radius: var(--radius-md);
     font-weight: 600;
     font-family: var(--font-sans);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     gap: 0.6rem;
     white-space: nowrap;
     cursor: pointer;
-    border: none;
+    border: 1px solid transparent;
     outline: none;
+    position: relative;
+    user-select: none;
+}
+
+.button:focus-visible {
+    box-shadow: 0 0 0 3px var(--border-focus);
 }
 
 .primary {
     background: var(--primary);
     color: white;
-    box-shadow: 0 4px 15px var(--primary-glow);
 }
 
 .primary:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 25px var(--primary-glow);
-    filter: brightness(1.1);
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
 .primary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0);
+    filter: brightness(0.9);
 }
 
 .secondary {
     background: var(--secondary);
     color: white;
-    box-shadow: 0 4px 15px var(--secondary-glow);
 }
 
 .secondary:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 25px var(--secondary-glow);
     filter: brightness(1.1);
-}
-
-.secondary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
 .ghost {
@@ -53,17 +54,39 @@
 
 .ghost:hover {
     background: var(--primary-glow);
-    transform: translateY(-1px);
+}
+
+.subtle {
+    background: var(--surface-muted);
+    color: var(--primary);
+    border-color: var(--surface-border);
+}
+
+.subtle:hover {
+    background: var(--primary-glow);
+    border-color: var(--border-focus);
+}
+
+.outline {
+    background: transparent;
+    border-color: var(--surface-border);
+    color: var(--foreground);
+}
+
+.outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-glow);
 }
 
 .large {
-    padding: 0.8rem 1.8rem;
+    padding: 0.8rem 2rem;
     font-size: 1.1rem;
     border-radius: var(--radius-lg);
 }
 
 .small {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
     border-radius: var(--radius-sm);
 }

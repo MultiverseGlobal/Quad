@@ -59,38 +59,45 @@ export default async function NetworkPage({ searchParams }: { searchParams: { qu
 
                     <div className={styles.directoryGrid}>
                         {allProfiles && allProfiles.length > 0 ? (
-                            allProfiles.map((p) => {
+                            allProfiles.map((p, index) => {
                                 const isFollowing = followingIds.has(p.id);
                                 return (
-                                    <div key={p.id} className={styles.profileCard}>
+                                    <div 
+                                        key={p.id} 
+                                        className={`${styles.profileCard} animate-slide-up`}
+                                        style={{ animationDelay: `${index * 0.05}s` }}
+                                    >
                                         <div className={styles.avatar}>
                                             {p.full_name?.[0] || 'S'}
                                         </div>
-                                        <h3 className={styles.name}>{p.full_name}</h3>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
+                                            <h3 className={styles.name}>{p.full_name}</h3>
+                                            <Sparkles size={14} className="text-secondary" />
+                                        </div>
                                         <p className={styles.dept}>{p.department}</p>
                                         
                                         <div className={styles.meta}>
                                             <div className={styles.metaItem}>
                                                 <GraduationCap size={14} />
-                                                <span>Level {p.level || '100L'}</span>
+                                                <span>{p.level || '100L'} Scholar</span>
                                             </div>
                                         </div>
 
-                                        <div className={styles.actions}>
+                                        <div className={styles.actions} style={{ width: '100%' }}>
                                             <form action={toggleFollow.bind(null, p.id, isFollowing)}>
                                                 <Button 
-                                                    variant={isFollowing ? "ghost" : "primary"} 
+                                                    variant={isFollowing ? "outline" : "primary"} 
                                                     size="small"
-                                                    style={{ width: '100%', border: isFollowing ? '1px solid var(--surface-border)' : 'none' }}
+                                                    style={{ width: '100%' }}
                                                 >
                                                     {isFollowing ? (
                                                         <>
-                                                            <UserMinus size={16} style={{ marginRight: '0.5rem' }} />
+                                                            <UserMinus size={16} />
                                                             Following
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <UserPlus size={16} style={{ marginRight: '0.5rem' }} />
+                                                            <UserPlus size={16} />
                                                             Connect
                                                         </>
                                                     )}

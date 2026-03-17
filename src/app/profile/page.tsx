@@ -23,66 +23,69 @@ export default async function ProfilePage() {
     return (
         <>
             <Navbar />
-            <div className={styles.profile}>
+            <div className={`${styles.profile} animate-fade-in`}>
                 <div className="container">
                     <div className={styles.profileWrapper}>
-                        <aside className={styles.sidebar}>
+                        <aside className={`${styles.sidebar} animate-slide-up stagger-1`}>
                             <div className={styles.profileCard}>
                                 <div className={styles.avatarLarge}>
                                     {profile?.full_name?.[0] || user.email?.[0]?.toUpperCase()}
                                 </div>
-                                <h1 className={styles.name}>{profile?.full_name || 'Scholar'}</h1>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
+                                    <h1 className={styles.name}>{profile?.full_name || 'Scholar'}</h1>
+                                    <Sparkles size={20} className="text-secondary" />
+                                </div>
                                 <p className={styles.deptInfo}>{profile?.department || 'Nigerian Student'}</p>
                                 <p className={styles.bio}>
                                     {profile?.bio || 'Proud student of Veritas University. Connect with me for collaborations and study groups!'}
                                 </p>
                                 <Link href="/profile/edit" style={{ width: '100%' }}>
-                                    <Button style={{ width: '100%' }}>Edit Profile</Button>
+                                    <Button variant="outline" style={{ width: '100%' }}>Edit Professional Profile</Button>
                                 </Link>
                             </div>
                         </aside>
 
                         <main className={styles.mainSection}>
-                            <div className={styles.contentCard}>
+                            <div className={`${styles.contentCard} animate-slide-up stagger-2`}>
                                 <h2 className={styles.cardTitle}>
                                     <LinkIcon size={24} className="text-secondary" />
                                     Digital Hub
                                 </h2>
                                 <div className={styles.linkItem}>
-                                    <div style={{ padding: '0.75rem', background: '#FF45001a', borderRadius: 'var(--radius-sm)', color: '#FF4500' }}>
+                                    <div style={{ padding: '0.75rem', background: 'hsla(142, 70%, 38%, 0.1)', borderRadius: 'var(--radius-md)', color: 'var(--secondary)' }}>
                                         <ShoppingBag size={20} />
                                     </div>
                                     <div className={styles.linkInfo}>
-                                        <h4>{profile?.full_name?.split(' ')[0] || 'My'} Store</h4>
+                                        <h4 style={{ fontFamily: 'var(--font-display)' }}>{profile?.full_name?.split(' ')[0] || 'My'} Store</h4>
                                         <p>{profile?.loops_shop_url ? 'Verified Loops Link' : 'No Loops store connected yet'}</p>
                                     </div>
                                     <ExternalLink size={18} style={{ marginLeft: 'auto', opacity: 0.5 }} />
                                 </div>
                                 
                                 <div className={styles.linkItem}>
-                                    <div style={{ padding: '0.75rem', background: 'var(--primary-glow)', borderRadius: 'var(--radius-sm)', color: 'var(--primary)' }}>
+                                    <div style={{ padding: '0.75rem', background: 'var(--primary-glow)', borderRadius: 'var(--radius-md)', color: 'var(--primary)' }}>
                                         <Mail size={20} />
                                     </div>
                                     <div className={styles.linkInfo}>
-                                        <h4>Institutional Email</h4>
-                                        <p>{user.email}</p>
+                                        <h4 style={{ fontFamily: 'var(--font-display)' }}>Institutional Email</h4>
+                                        <p style={{ fontWeight: 500 }}>{user.email}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className={styles.contentCard}>
+                            <div className={`${styles.contentCard} animate-slide-up stagger-3`}>
                                 <h2 className={styles.cardTitle}>
                                     <GraduationCap size={24} className="text-secondary" />
                                     Academic Snapshot
                                 </h2>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                                    <div style={{ padding: '1.5rem', background: 'var(--background)', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)' }}>
-                                        <h4 style={{ fontWeight: 800, color: 'var(--primary)', marginBottom: '0.5rem' }}>Academic Level</h4>
-                                        <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--secondary)' }}>{profile?.level || '100L'}</span>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                                    <div style={{ padding: '2rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--surface-border)', textAlign: 'center' }}>
+                                        <h4 style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letter-spacing: '0.05em' }}>Current Level</h4>
+                                        <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--secondary)', fontFamily: 'var(--font-display)' }}>{profile?.level || '100L'}</span>
                                     </div>
-                                    <div style={{ padding: '1.5rem', background: 'var(--background)', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)' }}>
-                                        <h4 style={{ fontWeight: 800, color: 'var(--primary)', marginBottom: '0.5rem' }}>Matriculation</h4>
-                                        <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--primary)' }}>{profile?.matric_number || 'Pending'}</span>
+                                    <div style={{ padding: '2rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--surface-border)', textAlign: 'center' }}>
+                                        <h4 style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letter-spacing: '0.05em' }}>Matriculation</h4>
+                                        <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.02em' }}>{profile?.matric_number || 'Pending'}</span>
                                     </div>
                                 </div>
                             </div>

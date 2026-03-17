@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { NavLink } from './NavLink';
 import { Button } from '../ui/Button';
 import styles from './Navbar.module.css';
 import { GraduationCap, User as UserIcon } from 'lucide-react';
@@ -18,10 +18,10 @@ export async function Navbar() {
                 </Link>
 
                 <div className={styles.navLinks}>
-                    <Link href="/community" className={styles.link}>Feed</Link>
-                    <Link href="/network" className={styles.link}>Network</Link>
-                    <Link href="/opportunities" className={styles.link}>Opportunities</Link>
-                    <Link href="/profile" className={styles.link}>Your Shop</Link>
+                    <NavLink href="/community">Feed</NavLink>
+                    <NavLink href="/network">Network</NavLink>
+                    <NavLink href="/opportunities">Opportunities</NavLink>
+                    <NavLink href="/profile">Your Shop</NavLink>
                 </div>
 
                 <div className={styles.actions}>

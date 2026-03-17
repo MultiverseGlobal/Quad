@@ -55,14 +55,21 @@ export default async function CommunityPage() {
 
                     <div className={styles.postList}>
                         {posts && posts.length > 0 ? (
-                            posts.map(post => (
-                                <article key={post.id} className={styles.postCard}>
+                            posts.map((post, index) => (
+                                <article 
+                                    key={post.id} 
+                                    className={`${styles.postCard} animate-slide-up`}
+                                    style={{ animationDelay: `${index * 0.1}s` }}
+                                >
                                     <div className={styles.authorInfo}>
                                         <div className={styles.avatar}>
                                             {post.profiles?.full_name?.[0] || 'U'}
                                         </div>
                                         <div>
-                                            <div className={styles.authorName}>{post.profiles?.full_name || 'Anonymous Student'}</div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                <div className={styles.authorName}>{post.profiles?.full_name || 'Anonymous Student'}</div>
+                                                <Sparkles size={14} className="text-secondary" />
+                                            </div>
                                             <div className={styles.authorDept}>{post.profiles?.department || 'Verified Scholar'}</div>
                                         </div>
                                     </div>
@@ -70,18 +77,18 @@ export default async function CommunityPage() {
                                         {post.content}
                                     </div>
                                     <div className={styles.postActions}>
-                                        <div className={styles.action}>
-                                            <Heart size={20} />
+                                        <Button variant="ghost" size="small" className={styles.action}>
+                                            <Heart size={18} />
                                             0
-                                        </div>
-                                        <div className={styles.action}>
-                                            <MessageCircle size={20} />
+                                        </Button>
+                                        <Button variant="ghost" size="small" className={styles.action}>
+                                            <MessageCircle size={18} />
                                             0
-                                        </div>
-                                        <div className={styles.action}>
-                                            <Share2 size={20} />
+                                        </Button>
+                                        <Button variant="ghost" size="small" className={styles.action} style={{ marginLeft: 'auto' }}>
+                                            <Share2 size={18} />
                                             Share
-                                        </div>
+                                        </Button>
                                     </div>
                                 </article>
                             ))

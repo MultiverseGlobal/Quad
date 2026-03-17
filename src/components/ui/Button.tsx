@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import styles from './Button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'ghost';
+    variant?: 'primary' | 'secondary' | 'ghost' | 'subtle' | 'outline';
     size?: 'small' | 'normal' | 'large';
     children: React.ReactNode;
 }

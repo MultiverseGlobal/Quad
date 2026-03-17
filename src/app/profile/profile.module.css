@@ -1,6 +1,7 @@
 .profile {
-  padding: 4rem 0;
-  min-height: calc(100vh - 4.5rem);
+  padding: 8rem 0 4rem;
+  min-height: 100vh;
+  background: radial-gradient(circle at 100% 0%, hsla(212, 100%, 15%, 0.02) 0%, transparent 40%);
 }
 
 .profileWrapper {
@@ -16,34 +17,44 @@
 }
 
 .profileCard {
-    background: white;
-    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border-radius: var(--radius-xl);
     border: 1px solid var(--surface-border);
     padding: 3rem 2rem;
     text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profileCard:hover {
     box-shadow: var(--shadow-lg);
+    border-color: hsla(212, 100%, 15%, 0.1);
 }
 
 .avatarLarge {
-    width: 8rem;
-    height: 8rem;
-    border-radius: var(--radius-full);
-    background: var(--primary);
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 3.5rem;
+    font-weight: 900;
     margin: 0 auto 2rem;
-    border: 4px solid var(--primary-glow);
+    border: 6px solid var(--surface);
+    box-shadow: 0 12px 24px -6px var(--primary-glow);
+    font-family: var(--font-display);
 }
 
 .name {
-    font-size: 1.75rem;
-    font-weight: 850;
+    font-size: 2rem;
+    font-weight: 900;
     color: var(--primary);
     margin-bottom: 0.5rem;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
 }
 
 .deptInfo {
@@ -69,20 +80,28 @@
 }
 
 .contentCard {
-    background: white;
-    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border-radius: var(--radius-xl);
     border: 1px solid var(--surface-border);
-    padding: 2.5rem;
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contentCard:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: hsla(212, 100%, 15%, 0.1);
 }
 
 .cardTitle {
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
+    font-family: var(--font-display);
 }
 
 .linkItem {

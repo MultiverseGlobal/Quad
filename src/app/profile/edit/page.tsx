@@ -22,71 +22,110 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
     return (
         <>
             <Navbar />
-            <div className={styles.profile} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 80px)' }}>
-                <div className="container" style={{ maxWidth: '600px' }}>
-                    <div className={styles.contentCard} style={{ padding: '2.5rem' }}>
-                        <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--primary)', fontFamily: 'var(--font-display)' }}>
-                            Personalize Your Profile
+            <div className={`${styles.profile} animate-fade-in`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '10rem 0 6rem' }}>
+                <div className="container" style={{ maxWidth: '640px' }}>
+                    <div className={`${styles.contentCard} animate-slide-up`} style={{ padding: '3.5rem' }}>
+                        <h1 style={{ fontSize: '2.5rem', marginBottom: '1.25rem', color: 'var(--primary)', fontFamily: 'var(--font-display)', fontWeight: 900, letterSpacing: '-0.03em' }}>
+                            Personalize Profile
                         </h1>
+                        <p style={{ color: 'var(--muted)', marginBottom: '3rem', fontSize: '1.1rem', fontWeight: 500 }}>
+                            Refine your professional identity on the Quad campus network.
+                        </p>
+
                         {searchParams?.error && (
-                            <div style={{ padding: '1rem', background: '#ff000010', color: 'var(--error)', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem', border: '1px solid #ff000020' }}>
+                            <div style={{ padding: '1rem', background: '#ff000010', color: 'var(--error)', borderRadius: 'var(--radius-lg)', marginBottom: '2rem', border: '1px solid #ff000020', fontWeight: 600, textAlign: 'center' }}>
                                 {searchParams.error}
                             </div>
                         )}
-                        <form action={updateProfile} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Full Name</label>
+                        <form action={updateProfile} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <label style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--primary)', marginLeft: '0.25rem' }}>Full Professional Name</label>
                                 <input 
                                     name="fullName" 
                                     defaultValue={profile?.full_name} 
                                     placeholder="Your Display Name" 
-                                    className={styles.inputField} 
-                                    style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)', background: 'var(--background)' }}
+                                    style={{ 
+                                        padding: '1rem 1.25rem', 
+                                        borderRadius: 'var(--radius-lg)', 
+                                        border: '1px solid var(--surface-border)', 
+                                        background: 'var(--surface-muted)',
+                                        fontSize: '1rem',
+                                        fontWeight: 500,
+                                        transition: 'all 0.3s ease',
+                                        color: 'var(--foreground)'
+                                    }}
                                 />
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Bio</label>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <label style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--primary)', marginLeft: '0.25rem' }}>Professional Bio</label>
                                 <textarea 
                                     name="bio" 
                                     defaultValue={profile?.bio} 
-                                    placeholder="Tell the campus about yourself..." 
+                                    placeholder="Tell the campus about your academic goals and interests..." 
                                     rows={4}
-                                    style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)', background: 'var(--background)', resize: 'none', fontFamily: 'inherit' }}
+                                    style={{ 
+                                        padding: '1.25rem', 
+                                        borderRadius: 'var(--radius-lg)', 
+                                        border: '1px solid var(--surface-border)', 
+                                        background: 'var(--surface-muted)', 
+                                        resize: 'none', 
+                                        fontFamily: 'inherit',
+                                        fontSize: '1rem',
+                                        fontWeight: 500,
+                                        transition: 'all 0.3s ease',
+                                        color: 'var(--foreground)'
+                                    }}
                                 />
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Academic Level</label>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    <label style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--primary)', marginLeft: '0.25rem' }}>Academic Level</label>
                                     <select 
                                         name="level" 
                                         defaultValue={profile?.level || '100L'}
-                                        style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)', background: 'var(--background)' }}
+                                        style={{ 
+                                            padding: '1rem 1.25rem', 
+                                            borderRadius: 'var(--radius-lg)', 
+                                            border: '1px solid var(--surface-border)', 
+                                            background: 'var(--surface-muted)',
+                                            fontSize: '1rem',
+                                            fontWeight: 500,
+                                            appearance: 'none',
+                                            color: 'var(--foreground)'
+                                        }}
                                     >
-                                        <option value="100L">100L</option>
-                                        <option value="200L">200L</option>
-                                        <option value="300L">300L</option>
-                                        <option value="400L">400L</option>
-                                        <option value="500L">500L</option>
-                                        <option value="Graduate">Graduate</option>
+                                        <option value="100L">Freshman (100L)</option>
+                                        <option value="200L">Sophomore (200L)</option>
+                                        <option value="300L">Junior (300L)</option>
+                                        <option value="400L">Senior (400L)</option>
+                                        <option value="500L">Super Senior (500L)</option>
+                                        <option value="Graduate">Post-Graduate Scholar</option>
                                     </select>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Loops Shop URL (Optional)</label>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    <label style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--primary)', marginLeft: '0.25rem' }}>Loops Shop URL</label>
                                     <input 
                                         name="loops_shop_url" 
                                         defaultValue={profile?.loops_shop_url} 
-                                        placeholder="loops.com/shop/yourname"
-                                        className={styles.inputField}
-                                        style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)', background: 'var(--background)' }}
+                                        placeholder="loops.com/shop/..."
+                                        style={{ 
+                                            padding: '1rem 1.25rem', 
+                                            borderRadius: 'var(--radius-lg)', 
+                                            border: '1px solid var(--surface-border)', 
+                                            background: 'var(--surface-muted)',
+                                            fontSize: '1rem',
+                                            fontWeight: 500,
+                                            color: 'var(--foreground)'
+                                        }}
                                     />
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                <Button type="submit" style={{ flex: 1 }}>Save Changes</Button>
-                                <Button variant="ghost" type="button" style={{ flex: 1, border: '1px solid var(--surface-border)' }}>Cancel</Button>
+                            <div style={{ display: 'flex', gap: '1.25rem', marginTop: '1.5rem' }}>
+                                <Button type="submit" size="large" style={{ flex: 1 }}>Save Professional Profile</Button>
+                                <Button variant="ghost" type="button" onClick={() => window.history.back()} style={{ flex: 1, border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-lg)' }}>Cancel</Button>
                             </div>
                         </form>
                     </div>
