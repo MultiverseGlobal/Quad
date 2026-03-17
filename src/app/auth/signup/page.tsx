@@ -4,7 +4,8 @@ import styles from '../auth.module.css';
 import { signup } from '../actions';
 import { GraduationCap, ShieldCheck } from 'lucide-react';
 
-export default function SignupPage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function SignupPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+    const { error } = await searchParams;
     return (
         <div className={styles.authWrapper}>
             <div className={styles.card} style={{ maxWidth: '540px' }}>
@@ -17,7 +18,7 @@ export default function SignupPage({ searchParams }: { searchParams: { error?: s
                 <h1 className={styles.title}>Join the Quad</h1>
                 <p className={styles.subtitle}>Verify your student status to continue</p>
 
-                {searchParams?.error && <div className={styles.error}>{searchParams.error}</div>}
+                {error && <div className={styles.error}>{error}</div>}
 
                 <form className={styles.form} action={signup}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>

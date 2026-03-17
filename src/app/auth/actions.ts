@@ -13,7 +13,8 @@ export async function signup(formData: FormData) {
     const department = formData.get('department') as string;
 
     // Email Domain Validation (Veritas University Abuja)
-    if (!email.endsWith('@veritas.edu.ng')) {
+    const allowedTestingEmails = ['multiverseglobals@gmail.com'];
+    if (!email.endsWith('@veritas.edu.ng') && !allowedTestingEmails.includes(email)) {
         return redirect('/auth/signup?error=Only @veritas.edu.ng email addresses are allowed.');
     }
 
