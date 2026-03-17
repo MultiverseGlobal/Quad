@@ -80,11 +80,11 @@ export default async function ProfilePage() {
                                 </h2>
                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                                     <div style={{ padding: '2rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--surface-border)', textAlign: 'center' }}>
-                                        <h4 style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letter-spacing: '0.05em' }}>Current Level</h4>
+                                        <h4 style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current Level</h4>
                                         <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--secondary)', fontFamily: 'var(--font-display)' }}>{profile?.level || '100L'}</span>
                                     </div>
                                     <div style={{ padding: '2rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--surface-border)', textAlign: 'center' }}>
-                                        <h4 style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letter-spacing: '0.05em' }}>Matriculation</h4>
+                                        <h4 style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Matriculation</h4>
                                         <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.02em' }}>{profile?.matric_number || 'Pending'}</span>
                                     </div>
                                 </div>

@@ -8,14 +8,7 @@ import {
   Sparkles,
   Briefcase,
   ArrowRight,
-  ShieldCheck
-} from "lucide-react";
-
-import {
-  Users,
-  Sparkles,
-  Briefcase,
-  ArrowRight,
+  ShieldCheck,
   GraduationCap,
   TrendingUp
 } from "lucide-react";
