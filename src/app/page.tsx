@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 import styles from "./page.module.css";
 import {
   Users,
@@ -29,11 +30,15 @@ export default function Home() {
             explore opportunities, and link your Loops shop to your academic profile.
           </p>
           <div className={styles.ctaGroup}>
-            <Button size="large">
-              Join the Quad
-              <ArrowRight size={20} />
-            </Button>
-            <Button variant="secondary" size="large">Explore Community</Button>
+            <Link href="/auth/signup">
+              <Button size="large">
+                Join the Quad
+                <ArrowRight size={20} />
+              </Button>
+            </Link>
+            <Link href="/community">
+              <Button variant="secondary" size="large">Explore Community</Button>
+            </Link>
           </div>
         </section>
 

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 import { signOut } from '../auth/actions';
 import { Navbar } from '@/components/layout/Navbar';
 import styles from './dashboard.module.css';
@@ -82,7 +83,9 @@ export default async function DashboardPage() {
                                         <>
                                             <MessageSquare size={48} />
                                             <p>No new updates in {profile?.department || 'your department'} yet.</p>
-                                            <Button variant="secondary">Start a Conversation</Button>
+                                            <Link href="/community/new">
+                                                <Button variant="secondary">Start a Conversation</Button>
+                                            </Link>
                                         </>
                                     )}
                                 </div>
@@ -101,7 +104,9 @@ export default async function DashboardPage() {
                                                     <h4 style={{ fontWeight: 700, color: 'var(--primary)' }}>{job.title}</h4>
                                                     <p style={{ fontSize: '0.875rem', color: 'var(--muted)' }}>{job.company} • Verified</p>
                                                 </div>
-                                                <Button variant="ghost" size="small">View Details</Button>
+                                                <Link href="/opportunities">
+                                                    <Button variant="ghost" size="small">View Details</Button>
+                                                </Link>
                                             </div>
                                         ))
                                     ) : (
@@ -129,9 +134,15 @@ export default async function DashboardPage() {
                                     University Links
                                 </h3>
                                 <nav className={styles.quickActions}>
-                                    <Button variant="ghost" className={styles.actionButton}>My Profile</Button>
-                                    <Button variant="ghost" className={styles.actionButton}>Loops Shop</Button>
-                                    <Button variant="ghost" className={styles.actionButton}>Veritas Portal</Button>
+                                    <Link href="/profile" style={{ width: '100%', textDecoration: 'none' }}>
+                                        <Button variant="ghost" className={styles.actionButton}>My Profile</Button>
+                                    </Link>
+                                    <Link href="/profile" style={{ width: '100%', textDecoration: 'none' }}>
+                                        <Button variant="ghost" className={styles.actionButton}>Loops Shop</Button>
+                                    </Link>
+                                    <a href="https://portal.veritas.edu.ng/" target="_blank" rel="noopener noreferrer" style={{ width: '100%', textDecoration: 'none' }}>
+                                        <Button variant="ghost" className={styles.actionButton}>Veritas Portal</Button>
+                                    </a>
                                     <form action={signOut} style={{ width: '100%' }}>
                                         <Button variant="ghost" className={styles.actionButton} style={{ color: 'var(--error)' }}>
                                             <LogOut size={18} />
