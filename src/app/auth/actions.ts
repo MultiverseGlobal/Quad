@@ -12,11 +12,6 @@ export async function signup(formData: FormData) {
     const matricNumber = formData.get('matricNumber') as string;
     const department = formData.get('department') as string;
 
-    // Email Domain Validation (Veritas University Abuja)
-    const allowedTestingEmails = ['multiverseglobals@gmail.com'];
-    if (!email.endsWith('@veritas.edu.ng') && !allowedTestingEmails.includes(email)) {
-        return redirect('/auth/signup?error=Only @veritas.edu.ng email addresses are allowed.');
-    }
 
     const { data: authData, error: authError } = await supabase.auth.signUp({
         email,

@@ -16,7 +16,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
                 </div>
 
                 <h1 className={styles.title}>Join the Quad</h1>
-                <p className={styles.subtitle}>Verify your student status to continue</p>
+                <p className={styles.subtitle}>Create your account to join the community</p>
 
                 {error && <div className={styles.error}>{error}</div>}
 
@@ -45,8 +45,8 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
                     </div>
 
                     <div className={styles.field}>
-                        <label className={styles.label}>Verification Email</label>
-                        <input name="email" type="email" className={styles.input} placeholder="name@veritas.edu.ng" required />
+                        <label className={styles.label}>Email Address</label>
+                        <input name="email" type="email" className={styles.input} placeholder="name@email.com" required />
                     </div>
 
                     <div className={styles.field}>
