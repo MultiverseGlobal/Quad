@@ -22,7 +22,12 @@ export async function Navbar() {
                     <NavLink href="/community">Feed</NavLink>
                     <NavLink href="/network">Network</NavLink>
                     <NavLink href="/opportunities">Opportunities</NavLink>
-                    <NavLink href="/profile">Your Shop</NavLink>
+                    <div style={{ position: 'relative' }}>
+                        <NavLink href="/messages">Briefs</NavLink>
+                        {user && (
+                            <UnreadDot userId={user.id} />
+                        )}
+                    </div>
                 </div>
 
                 <div className={styles.actions}>
@@ -51,5 +56,30 @@ export async function Navbar() {
                 </div>
             </div>
         </nav>
+    );
+}
+
+async function UnreadDot({ userId }: { userId: string }) {
+    const supabase = await createClient();
+    const { count } = await supabase
+        .from('messages')
+        .select('*', { count: 'exact', head: true })
+        .eq('receiver_id', userId)
+        .eq('is_read', false);
+
+    if (!count || count === 0) return null;
+
+    return (
+        <div style={{
+            position: 'absolute',
+            top: '0',
+            right: '-6px',
+            width: '8px',
+            height: '8px',
+            background: '#ef4444',
+            borderRadius: '50%',
+            border: '2px solid var(--surface)',
+            boxShadow: '0 0 0 2px var(--background)'
+        }} />
     );
 }

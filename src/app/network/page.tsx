@@ -3,7 +3,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/Button';
 import styles from './network.module.css';
 import { Users, Search, MapPin, UserPlus, UserMinus, GraduationCap, Sparkles } from 'lucide-react';
-import { toggleFollow } from './actions';
+import { toggleFollow, acceptConnectionRequest } from './actions';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Avatar } from '@/components/ui/Avatar';
@@ -21,7 +21,7 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
     let profilesQuery = supabase
         .from('profiles')
         .select('*')
-        .neq('id', user.id);
+        .neq('id', currentUser.id);
 
     if (query) {
         profilesQuery = profilesQuery.or(`full_name.ilike.%${query}%,department.ilike.%${query}%`);
@@ -29,13 +29,33 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
 
     const { data: allProfiles } = await profilesQuery.limit(20);
 
-    // Fetch current user's connections
+    // Fetch current user's connections (both sent and received)
     const { data: connections } = await supabase
         .from('connections')
-        .select('following_id')
-        .eq('follower_id', user.id);
+        .select('*')
+        .or(`follower_id.eq.${currentUser.id},following_id.eq.${currentUser.id}`);
 
-    const followingIds = new Set(connections?.map(c => c.following_id) || []);
+    // Fetch pending requests FOR the current user
+    const { data: pendingInvitations } = await supabase
+        .from('connections')
+        .select(`
+            id,
+            follower_id,
+            profiles!connections_follower_id_fkey (
+                full_name,
+                department,
+                avatar_url
+            )
+        `)
+        .eq('following_id', currentUser.id)
+        .eq('status', 'pending');
+
+    // Map connections for easy lookup
+    const connectionMap = new Map();
+    connections?.forEach(c => {
+        const otherId = c.follower_id === currentUser.id ? c.following_id : c.follower_id;
+        connectionMap.set(otherId, c.status || 'accepted'); // Default to accepted for legacy
+    });
 
     return (
         <>
@@ -60,10 +80,41 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                         </form>
                     </header>
 
+                    {pendingInvitations && pendingInvitations.length > 0 && (
+                        <section className={styles.invitationsSection} style={{ marginBottom: '4rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                                <Sparkles size={24} className="text-secondary" />
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'var(--font-display)' }}>Invitation Center</h2>
+                                <span className={styles.invitationCount}>{pendingInvitations.length}</span>
+                            </div>
+                            <div className={styles.invitationGrid}>
+                                {pendingInvitations.map((inv: any) => (
+                                    <div key={inv.id} className={styles.invitationCard}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <Avatar name={inv.profiles?.full_name} size="medium" />
+                                            <div>
+                                                <h4 style={{ fontWeight: 700, color: 'var(--primary)' }}>{inv.profiles?.full_name}</h4>
+                                                <p style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>{inv.profiles?.department}</p>
+                                            </div>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                                            <form action={acceptConnectionRequest.bind(null, inv.follower_id)} style={{ flex: 1 }}>
+                                                <Button size="small" style={{ width: '100%' }}>Accept</Button>
+                                            </form>
+                                            <form action={toggleFollow.bind(null, inv.follower_id, true)} style={{ flex: 1 }}>
+                                                <Button variant="ghost" size="small" style={{ width: '100%', border: '1px solid var(--surface-border)' }}>Ignore</Button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
                     <div className={styles.directoryGrid}>
                         {allProfiles && allProfiles.length > 0 ? (
                             allProfiles.map((p, index) => {
-                                const isFollowing = followingIds.has(p.id);
+                                const status = connectionMap.get(p.id);
                                 return (
                                     <div 
                                         key={p.id} 
@@ -91,16 +142,22 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                                         </Link>
 
                                         <div className={styles.actions} style={{ width: '100%' }}>
-                                            <form action={toggleFollow.bind(null, p.id, isFollowing)}>
+                                            <form action={toggleFollow.bind(null, p.id, !!status)}>
                                                 <Button 
-                                                    variant={isFollowing ? "outline" : "primary"} 
+                                                    variant={status === 'accepted' ? "outline" : status === 'pending' ? "ghost" : "primary"} 
                                                     size="small"
                                                     style={{ width: '100%' }}
+                                                    disabled={status === 'pending'}
                                                 >
-                                                    {isFollowing ? (
+                                                    {status === 'accepted' ? (
                                                         <>
-                                                            <UserMinus size={16} />
-                                                            Following
+                                                            <Users size={16} />
+                                                            Connected
+                                                        </>
+                                                    ) : status === 'pending' ? (
+                                                        <>
+                                                            <Sparkles size={16} className="text-secondary" />
+                                                            Pending Discovery
                                                         </>
                                                     ) : (
                                                         <>

@@ -66,6 +66,43 @@
     gap: 1.5rem;
 }
 
+.invitationsSection {
+    background: hsla(212, 100%, 15%, 0.02);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--surface-border);
+}
+
+.invitationCount {
+    background: var(--secondary);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.invitationGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.invitationCard {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.invitationCard:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--secondary);
+}
+
 .profileCard {
     background: var(--surface);
     border: 1px solid var(--surface-border);

@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Connect with your department, explore opportunities, and grow your campus network. Exclusive to Nigerian university students.",
 };
 
+import { ToastProvider } from "@/components/providers/ToastProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
       </body>
     </html>
   );

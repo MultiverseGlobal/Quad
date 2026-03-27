@@ -82,15 +82,15 @@ export default async function DiscussionDetailPage({ params }: { params: Promise
                         </div>
 
                         <div className={styles.postActions} style={{ paddingTop: '2rem' }}>
-                            <Button variant="ghost" size="medium">
+                            <Button variant="ghost" size="normal">
                                 <Heart size={20} />
                                 <span>Like • 24</span>
                             </Button>
-                            <Button variant="ghost" size="medium">
+                            <Button variant="ghost" size="normal">
                                 <MessageCircle size={20} />
                                 <span>Comments • 12</span>
                             </Button>
-                            <Button variant="ghost" size="medium" style={{ marginLeft: 'auto' }}>
+                            <Button variant="ghost" size="normal" style={{ marginLeft: 'auto' }}>
                                 <Share2 size={20} />
                                 <span>Share Discussion</span>
                             </Button>
