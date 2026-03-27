@@ -42,7 +42,9 @@ export default async function ConversationPage({ params }: { params: Promise<{ i
         .eq('status', 'accepted');
 
     const threads = connections?.map(c => {
-        const otherUser = c.follower_id === user.id ? c.receiver : c.profiles;
+        const otherUserTarget = c.follower_id === user.id ? c.receiver : c.profiles;
+        const otherUser = Array.isArray(otherUserTarget) ? otherUserTarget[0] : otherUserTarget;
+        
         return {
             id: otherUser.id,
             name: otherUser.full_name,
