@@ -50,52 +50,52 @@ export default async function MessagesPage() {
     return (
         <>
             <Navbar />
-            <div className={styles.messages}>
-                <div className="container">
-                    <div className={styles.messengerBox}>
-                        <aside className={styles.sidebar}>
-                            <div className={styles.sidebarHeader}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <h2>Direct Briefs</h2>
-                                    <Sparkles size={16} className="text-secondary" />
-                                </div>
-                            </div>
-                            <div className={styles.threadList}>
-                                {threads.map(thread => (
-                                    <Link key={thread.id} href={`/messages/${thread.id}`} className={styles.threadItem}>
-                                        <div style={{ position: 'relative' }}>
-                                            <Avatar name={thread.name} size="medium" />
-                                            {thread.unreadCount > 0 && <div className={styles.unreadBadge}>{thread.unreadCount}</div>}
-                                        </div>
-                                        <div className={styles.threadInfo}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                <div className={styles.threadName}>{thread.name}</div>
-                                                {thread.unreadCount > 0 && <Sparkles size={14} className="text-secondary" />}
-                                            </div>
-                                            <div className={styles.lastMessage}>{thread.dept}</div>
-                                        </div>
-                                    </Link>
-                                ))}
-                                {threads.length === 0 && (
-                                    <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--muted)' }}>
-                                        <p style={{ fontSize: '0.9rem' }}>Connect with fellow scholars to start a conversation.</p>
-                                    </div>
-                                )}
-                            </div>
-                        </aside>
-                        
-                        <main className={styles.chatArea}>
-                            <div className={styles.emptyChat}>
-                                <div style={{ padding: '2rem', background: 'var(--surface-muted)', borderRadius: '50%', color: 'var(--muted)' }}>
-                                    <MessageSquare size={48} />
-                                </div>
-                                <h3>Your Conversations</h3>
-                                <p>Select a thread to start collaborating.</p>
-                            </div>
-                        </main>
-                    </div>
+      <div className={styles.messages}>
+        <div className="container">
+          <div className={styles.messengerBox}>
+            <aside className={styles.sidebar}>
+              <div className={styles.sidebarHeader}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <h2>Direct Briefs</h2>
+                  <Sparkles size={18} className="text-secondary" />
                 </div>
-            </div>
+              </div>
+              <div className={styles.threadList}>
+                {threads.map(thread => (
+                  <Link key={thread.id} href={`/messages/${thread.id}`} className={styles.threadItem}>
+                    <div style={{ position: 'relative' }}>
+                      <Avatar name={thread.name} size="medium" />
+                      {thread.unreadCount > 0 && <div className={styles.unreadBadge}>{thread.unreadCount}</div>}
+                    </div>
+                    <div className={styles.threadInfo}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div className={styles.threadName}>{thread.name}</div>
+                        {thread.unreadCount > 0 && <Sparkles size={14} className="text-secondary" />}
+                      </div>
+                      <div className={styles.lastMessage}>{thread.dept}</div>
+                    </div>
+                  </Link>
+                ))}
+                {threads.length === 0 && (
+                  <div className={styles.emptyChat}>
+                    <p>Connect with fellow scholars to start a conversation.</p>
+                  </div>
+                )}
+              </div>
+            </aside>
+            
+            <main className={styles.chatArea}>
+              <div className={styles.emptyChat}>
+                <div style={{ padding: '2.5rem', background: 'var(--secondary-glow)', borderRadius: 'var(--radius-xl)', color: 'var(--secondary)' }}>
+                  <MessageSquare size={48} strokeWidth={1.5} />
+                </div>
+                <h3>Your Conversations</h3>
+                <p>Select a thread to start collaborating with your squad.</p>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
         </>
     );
 }

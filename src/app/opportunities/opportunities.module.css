@@ -1,149 +1,189 @@
 .opportunities {
-  padding: 2rem 0;
+  padding: 7rem 0 3rem;
   min-height: 100vh;
 }
 
 .header {
-  background: #fff;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.headerTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  margin-bottom: 0.25rem;
+}
+
+.headerSub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .filterArea {
-    margin-top: 1.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--surface-border);
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
 .searchBox {
-    flex: 1;
-    max-width: 400px;
-    position: relative;
+  position: relative;
+  width: 100%;
+  max-width: 360px;
 }
 
 .searchIcon {
-    position: absolute;
-    left: 0.85rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-    z-index: 1;
+  position: absolute;
+  left: 1.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  z-index: 1;
 }
 
 .searchInput {
-    width: 100%;
-    padding: 0.6rem 1rem 0.6rem 2.5rem;
-    background: var(--surface-muted);
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-    font-size: 0.85rem;
-    color: var(--foreground);
-    font-weight: 500;
-    transition: all 0.2s;
+  width: 100%;
+  padding: 0.9rem 1.25rem 0.9rem 3rem;
+  background: #fff;
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  color: var(--foreground);
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
 }
 
 .searchInput:focus {
-    outline: none;
-    background: #fff;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--border-focus);
+  outline: none;
+  background: #fff;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px var(--secondary-glow);
 }
 
 .tabs {
-    display: flex;
-    gap: 0.35rem;
-    align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: var(--background);
+  padding: 0.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--surface-border);
 }
 
 .tab {
-    padding: 0.45rem 1rem;
-    border-radius: var(--radius-md);
-    color: var(--muted);
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: all 0.2s;
-    text-decoration: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
 }
 
 .tab:hover {
-    color: var(--primary);
-    background: var(--surface-muted);
+  color: var(--primary);
 }
 
 .activeTab {
-    background: var(--surface-muted);
-    color: var(--primary);
+  background: #fff;
+  color: var(--secondary);
+  box-shadow: var(--shadow-sm);
 }
 
 .jobGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
 }
 
 .jobCard {
   background: #fff;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--surface-border);
-  padding: 1.5rem;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.jobCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-glow);
 }
 
 .jobTitle {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--primary);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
 }
 
 .companyName {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--muted);
-  font-size: 0.8rem;
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
 }
 
 .tags {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
 .tag {
-  padding: 0.3rem 0.75rem;
-  background: var(--surface-muted);
-  border-radius: var(--radius-sm);
-  font-size: 0.7rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--background);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
   font-weight: 800;
-  color: var(--muted);
+  color: var(--primary);
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.05em;
+  border: 1.5px solid transparent;
 }
 
-.internship { background: #eff6ff; color: #1e40af; border: 1px solid #dbeafe; }
-.job { background: #f0fdf4; color: #166534; border: 1px solid #dcfce7; }
-.gig { background: #fffbeb; color: #92400e; border: 1px solid #fef3c7; }
-.event { background: #faf5ff; color: #6b21a8; border: 1px solid #f3e8ff; }
+.tag svg { color: var(--secondary); }
+
+.internship { background: #eff6ff; color: #1e40af; border-color: #dbeafe; }
+.job { background: #f0fdf4; color: #166534; border-color: #dcfce7; }
+.gig { background: #fffbeb; color: #92400e; border-color: #fef3c7; }
+.event { background: #faf5ff; color: #6b21a8; border-color: #f3e8ff; }
+
+.cardFooter {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--surface-border);
+}
 
 .emptyState {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem 2rem;
-    background: #fff;
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-    color: var(--muted);
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 6rem 2rem;
+  background: #fff;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .filterArea { flex-direction: column; align-items: stretch; }
+  .searchBox { max-width: 100%; }
 }
 
 @media (max-width: 768px) {
-    .jobGrid { grid-template-columns: 1fr; }
-    .tabs { overflow-x: auto; padding-bottom: 0.5rem; display: none; }
-    .opportunities { padding: 6rem 1rem 2rem; }
+  .headerTitle { font-size: 2rem; }
+  .opportunities { padding: 6rem 1.5rem 2rem; }
 }

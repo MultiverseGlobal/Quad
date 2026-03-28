@@ -1,187 +1,196 @@
 .network {
-    padding: 2rem 0;
-    min-height: 100vh;
+  padding: 7rem 0 3rem;
+  min-height: 100vh;
 }
 
 .header {
-    background: #fff;
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.5rem;
+  gap: 2rem;
 }
 
 .titleArea h1 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--primary);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  margin-bottom: 0.25rem;
 }
 
 .titleArea p {
-    font-size: 0.85rem;
-    color: var(--muted);
+  font-size: 1.05rem;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .searchBar {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
+  position: relative;
+  width: 100%;
+  max-width: 360px;
 }
 
 .searchIcon {
-    position: absolute;
-    left: 0.85rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-    z-index: 1;
+  position: absolute;
+  left: 1.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  z-index: 1;
 }
 
 .searchInput {
-    width: 100%;
-    padding: 0.6rem 1rem 0.6rem 2.5rem;
-    background: var(--surface-muted);
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-    font-size: 0.85rem;
-    color: var(--foreground);
-    font-weight: 500;
-    transition: all 0.2s;
+  width: 100%;
+  padding: 0.9rem 1.25rem 0.9rem 3rem;
+  background: #fff;
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  color: var(--foreground);
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
 }
 
 .searchInput:focus {
-    outline: none;
-    background: #fff;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--border-focus);
+  outline: none;
+  background: #fff;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px var(--secondary-glow);
 }
 
 .invitationsSection {
-    background: var(--surface-muted);
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--surface-border);
-    margin-bottom: 2rem;
+  background: var(--background);
+  padding: 2.5rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--surface-border);
+  margin-bottom: 4rem;
 }
 
 .invitationsSection h2 {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-display);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .invitationCount {
-    background: var(--primary);
-    color: white;
-    font-size: 0.6rem;
-    font-weight: 800;
-    padding: 1px 5px;
-    border-radius: var(--radius-sm);
+  background: var(--secondary);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-left: 0.5rem;
 }
 
 .invitationGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
 
 .invitationCard {
-    background: #fff;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--surface-border);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.2s;
+}
+
+.invitationCard:hover {
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
 }
 
 .directoryGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
 }
 
 .profileCard {
-    background: #fff;
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-    padding: 1.5rem 1.25rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background: #fff;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.profileCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-glow);
 }
 
 .name {
-    font-weight: 800;
-    font-size: 0.95rem;
-    color: var(--primary);
-    margin-top: 1rem;
-    margin-bottom: 0.15rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .dept {
-    color: var(--muted);
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
 }
 
 .meta {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
 }
 
 .metaItem {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--muted);
-    font-size: 0.7rem;
-    font-weight: 700;
-    background: var(--surface-muted);
-    padding: 0.2rem 0.6rem;
-    border-radius: var(--radius-sm);
-    text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: var(--background);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .actions {
-    margin-top: auto;
-    width: 100%;
+  margin-top: auto;
+  width: 100%;
 }
 
 .emptyState {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem 2rem;
-    background: #fff;
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-    color: var(--muted);
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 6rem 2rem;
+  background: #fff;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  color: var(--muted);
 }
 
 @media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 6rem 1rem 1.5rem;
-    }
-    .searchBar {
-        max-width: 100%;
-    }
-    .network {
-        padding: 0;
-    }
+  .header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .searchBar { max-width: 100%; }
+  .network { padding: 6rem 1.5rem 3rem; }
+  .titleArea h1 { font-size: 2rem; }
 }
