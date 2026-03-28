@@ -8,63 +8,63 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
     const { error } = await searchParams;
     return (
         <div className={styles.authWrapper}>
-            <div className={styles.card} style={{ maxWidth: '540px' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
-                    <ShieldCheck size={32} className="text-primary" />
-                </div>
+      <div className={styles.card} style={{ maxWidth: '540px' }}>
+        <div className={styles.iconHeader}>
+          <ShieldCheck size={42} className="text-secondary" />
+        </div>
 
-                <h1 className={styles.title}>Matriculation Portal</h1>
-                <p className={styles.subtitle}>Initialize your scholarship presence</p>
+        <h1 className={styles.title}>Join the Squad!</h1>
+        <p className={styles.subtitle}>Verify your identity and build your pulse</p>
 
-                {error && (
-                    <div style={{ padding: '0.75rem', background: '#ff000008', color: 'var(--error)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', fontSize: '0.8rem', fontWeight: 700, border: '1px solid #ff000015' }}>
-                        {error}
-                    </div>
-                )}
+        {error && (
+          <div className={styles.errorBanner}>
+            {error}
+          </div>
+        )}
 
-                <form className={styles.form} action={signup}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                        <div className={styles.field}>
-                            <label className={styles.label}>Full Name</label>
-                            <input name="fullName" type="text" className={styles.input} placeholder="e.g. Zahra Musa" required />
-                        </div>
-
-                        <div className={styles.field}>
-                            <label className={styles.label}>Matric ID</label>
-                            <input name="matricNumber" type="text" className={styles.input} placeholder="VUA/CSC/..." required />
-                        </div>
-                    </div>
-
-                    <div className={styles.field}>
-                        <label className={styles.label}>Primary Field</label>
-                        <select name="department" className={styles.input} required>
-                            <option value="">Select Department</option>
-                            <option value="Computer Science">Computer Science</option>
-                            <option value="Economics">Economics</option>
-                            <option value="Law">Law</option>
-                            <option value="Mass Communication">Mass Communication</option>
-                        </select>
-                    </div>
-
-                    <div className={styles.field}>
-                        <label className={styles.label}>University Email</label>
-                        <input name="email" type="email" className={styles.input} placeholder="scholar@veritas.edu.ng" required />
-                    </div>
-
-                    <div className={styles.field}>
-                        <label className={styles.label}>Secure Password</label>
-                        <input name="password" type="password" className={styles.input} placeholder="••••••••" required />
-                    </div>
-
-                    <Button type="submit" style={{ marginTop: '0.5rem', width: '100%' }}>
-                        Initialize Enrollment
-                    </Button>
-                </form>
-
-                <div className={styles.footer} style={{ fontSize: '0.8rem' }}>
-                    Already enrolled? <Link href="/auth/login" className={styles.link}>Access Workspace</Link>
-                </div>
+        <form className={styles.form} action={signup}>
+          <div className={styles.inputGrid}>
+            <div className={styles.field}>
+              <label className={styles.label}>Full Name</label>
+              <input name="fullName" type="text" className={styles.input} placeholder="e.g. Zahra Musa" required />
             </div>
+
+            <div className={styles.field}>
+              <label className={styles.label}>Matric ID</label>
+              <input name="matricNumber" type="text" className={styles.input} placeholder="VUA/CSC/..." required />
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label}>Your Department</label>
+            <select name="department" className={styles.input} required>
+              <option value="">Select Department</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Economics">Economics</option>
+              <option value="Law">Law</option>
+              <option value="Mass Communication">Mass Communication</option>
+            </select>
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label}>University Email</label>
+            <input name="email" type="email" className={styles.input} placeholder="scholar@veritas.edu.ng" required />
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label}>Secure Password</label>
+            <input name="password" type="password" className={styles.input} placeholder="••••••••" required />
+          </div>
+
+          <Button type="submit" variant="secondary" size="large" className={styles.submitBtn}>
+            Verify & Matriculate
+          </Button>
+        </form>
+
+        <div className={styles.footer}>
+          Already in the squad? <Link href="/auth/login" className={styles.link}>Sign In Here</Link>
+        </div>
+      </div>
         </div>
     );
 }

@@ -65,48 +65,49 @@ export default function RealtimeFeed({ initialPosts }: { initialPosts: Post[] })
     }, [supabase]);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div className={styles.postList}>
             {posts.map((post, index) => (
                 <article 
                     key={post.id} 
                     className={styles.postCard}
                 >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-                        <Link href={`/profile/${post.user_id}`} className={styles.authorInfo} style={{ textDecoration: 'none' }}>
+                    <header className={styles.postHeader}>
+                        <Link href={`/profile/${post.user_id}`} className={styles.authorInfo}>
                             <Avatar 
                                 name={post.profiles?.full_name} 
-                                size="medium" 
+                                size="large" 
+                                src={post.profiles?.avatar_url}
                             />
-                            <div>
+                            <div className={styles.authorMeta}>
                                 <div className={styles.authorName}>{post.profiles?.full_name || 'Anonymous Student'}</div>
                                 <div className={styles.authorDept}>{post.profiles?.department || 'Verified Scholar'}</div>
                             </div>
                         </Link>
-                        <div style={{ fontSize: '0.7rem', color: 'var(--muted)', fontWeight: 600, textTransform: 'uppercase' }}>
-                            {new Date(post.created_at).toLocaleDateString()}
-                        </div>
-                    </div>
+                        <time className={styles.postTime}>
+                            {new Date(post.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                        </time>
+                    </header>
                     
-                    <div className={styles.postContent} style={{ fontSize: '0.9rem', lineHeight: '1.5', color: 'var(--foreground)', marginBottom: '1rem' }}>
+                    <div className={styles.postContent}>
                         {post.content}
                     </div>
                     
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderTop: '1px solid var(--surface-border)', paddingTop: '0.75rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                            <button style={{ background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>
-                                <Heart size={14} />
-                                24
+                    <footer className={styles.postFooter}>
+                        <div className={styles.interactionGroup}>
+                            <button className={styles.interactionBtn}>
+                                <Heart size={18} />
+                                <span>24</span>
                             </button>
-                            <Link href={`/community/${post.id}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', fontSize: '0.8rem', fontWeight: 600 }}>
-                                <MessageCircle size={14} />
-                                {index % 3 === 0 ? 8 : 2} Comments
+                            <Link href={`/community/${post.id}`} className={styles.interactionBtn}>
+                                <MessageCircle size={18} />
+                                <span>{index % 3 === 0 ? 8 : 2} Comments</span>
                             </Link>
                         </div>
-                        <button style={{ marginLeft: 'auto', background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>
-                            <Share2 size={14} />
-                            Share
+                        <button className={styles.shareBtn}>
+                            <Share2 size={18} />
+                            <span>Share</span>
                         </button>
-                    </div>
+                    </footer>
                 </article>
             ))}
         </div>
