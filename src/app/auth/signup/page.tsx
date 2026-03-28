@@ -8,9 +8,9 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
     const { error } = await searchParams;
     return (
         <div className={styles.authWrapper}>
-      <div className={styles.card} style={{ maxWidth: '540px' }}>
+      <div className={`${styles.card} page-transition`}>
         <div className={styles.iconHeader}>
-          <ShieldCheck size={42} className="text-secondary" />
+          <ShieldCheck size={48} fill="currentColor" />
         </div>
 
         <h1 className={styles.title}>Join the Squad!</h1>
@@ -57,6 +57,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
           </div>
 
           <Button type="submit" variant="secondary" size="large" className={styles.submitBtn}>
+            <Zap size={18} fill="currentColor" />
             Verify & Matriculate
           </Button>
         </form>

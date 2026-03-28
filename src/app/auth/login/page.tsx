@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import styles from '../auth.module.css';
 import { login } from '../actions';
-import { GraduationCap } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export default function LoginPage({ searchParams }: { searchParams: { error?: string, message?: string } }) {
-    return (
-        <div className={styles.authWrapper}>
-      <div className={styles.card}>
+  return (
+    <div className={styles.authWrapper}>
+      <div className={`${styles.card} page-transition`}>
         <div className={styles.iconHeader}>
-          <GraduationCap size={42} className="text-secondary" />
+          <Sparkles size={48} fill="currentColor" />
         </div>
         
         <h1 className={styles.title}>Welcome Back!</h1>
@@ -44,6 +44,6 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
           New to the squad? <Link href="/auth/signup" className={styles.link}>Join for Free</Link>
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 }
