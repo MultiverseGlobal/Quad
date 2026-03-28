@@ -13,7 +13,8 @@ import {
     Sparkles,
     ArrowLeft,
     UserPlus,
-    MessageSquare
+    MessageSquare,
+    ShoppingBag
 } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
 import Link from 'next/link';

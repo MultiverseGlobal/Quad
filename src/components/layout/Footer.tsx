@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GraduationCap, Github, Twitter, Linkedin, Mail, Zap } from 'lucide-react';
+import { GraduationCap, Github, Twitter, Linkedin, Mail, Zap, Sparkles } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export const Footer = () => {

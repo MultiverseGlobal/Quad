@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import styles from '../auth.module.css';
 import { signup } from '../actions';
-import { GraduationCap, ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Zap } from 'lucide-react';
 
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
     const { error } = await searchParams;

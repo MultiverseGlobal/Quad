@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { updateProfile } from '../actions';
 import styles from '../profile.module.css';
+import { Sparkles } from 'lucide-react';
 
 export default async function EditProfilePage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
     const params = await searchParams;
