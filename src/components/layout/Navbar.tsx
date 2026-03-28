@@ -70,16 +70,6 @@ async function UnreadDot({ userId }: { userId: string }) {
     if (!count || count === 0) return null;
 
     return (
-        <div style={{
-            position: 'absolute',
-            top: '0',
-            right: '-6px',
-            width: '8px',
-            height: '8px',
-            background: '#ef4444',
-            borderRadius: '50%',
-            border: '2px solid var(--surface)',
-            boxShadow: '0 0 0 2px var(--background)'
-        }} />
+        <div className={styles.unreadDot} />
     );
 }

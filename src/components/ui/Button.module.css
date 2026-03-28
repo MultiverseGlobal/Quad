@@ -2,12 +2,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.6rem 1.4rem;
+    padding: 0.5rem 1.25rem;
     border-radius: var(--radius-md);
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 0.925rem;
     font-family: var(--font-sans);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    gap: 0.6rem;
+    gap: 0.5rem;
     white-space: nowrap;
     cursor: pointer;
     border: 1px solid transparent;
@@ -23,70 +24,72 @@
 .primary {
     background: var(--primary);
     color: white;
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .primary:hover {
-    filter: brightness(1.2);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    background: hsl(222, 47%, 15%);
+    transform: translateY(-0.5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .primary:active {
     transform: translateY(0);
-    filter: brightness(0.9);
+    background: var(--primary);
 }
 
 .secondary {
     background: var(--secondary);
     color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .secondary:hover {
     filter: brightness(1.1);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-0.5px);
 }
 
 .ghost {
-    color: var(--primary);
+    color: var(--foreground);
     background: transparent;
 }
 
 .ghost:hover {
-    background: var(--primary-glow);
+    background: var(--surface-muted);
 }
 
 .subtle {
     background: var(--surface-muted);
-    color: var(--primary);
+    color: var(--foreground);
     border-color: var(--surface-border);
 }
 
 .subtle:hover {
-    background: var(--primary-glow);
+    background: var(--surface);
     border-color: var(--border-focus);
 }
 
 .outline {
-    background: transparent;
+    background: #fff;
     border-color: var(--surface-border);
     color: var(--foreground);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .outline:hover {
     border-color: var(--primary);
-    color: var(--primary);
-    background: var(--primary-glow);
+    background: var(--background);
 }
 
 .large {
-    padding: 0.8rem 2rem;
-    font-size: 1.1rem;
-    border-radius: var(--radius-lg);
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
 }
 
 .small {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.8rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
     border-radius: var(--radius-sm);
 }

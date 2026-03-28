@@ -64,45 +64,45 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                 <div className="container">
                     <header className={styles.header}>
                         <div className={styles.titleArea}>
-                            <h1>Scholars Directory</h1>
-                            <p>Build your university network and find collaborators.</p>
+                            <h1>Peer Network</h1>
+                            <p>Collaborate with scholars across departments.</p>
                         </div>
                         
                         <form className={styles.searchBar}>
-                            <Search size={20} className={styles.searchIcon} />
+                            <Search size={16} className={styles.searchIcon} />
                             <input 
                                 name="query" 
                                 type="text" 
                                 defaultValue={query}
-                                placeholder="Search by name, department, or level..." 
+                                placeholder="Search Scholars..." 
                                 className={styles.searchInput}
                             />
                         </form>
                     </header>
 
                     {pendingInvitations && pendingInvitations.length > 0 && (
-                        <section className={styles.invitationsSection} style={{ marginBottom: '4rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                                <Sparkles size={24} className="text-secondary" />
-                                <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'var(--font-display)' }}>Invitation Center</h2>
+                        <section className={styles.invitationsSection}>
+                            <h2>
+                                <Sparkles size={14} />
+                                Pending Requests
                                 <span className={styles.invitationCount}>{pendingInvitations.length}</span>
-                            </div>
+                            </h2>
                             <div className={styles.invitationGrid}>
                                 {pendingInvitations.map((inv: any) => (
                                     <div key={inv.id} className={styles.invitationCard}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1 }}>
                                             <Avatar name={inv.profiles?.full_name} size="medium" />
-                                            <div>
-                                                <h4 style={{ fontWeight: 700, color: 'var(--primary)' }}>{inv.profiles?.full_name}</h4>
-                                                <p style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>{inv.profiles?.department}</p>
+                                            <div style={{ minWidth: 0 }}>
+                                                <div style={{ fontWeight: 800, color: 'var(--primary)', fontSize: '0.85rem' }}>{inv.profiles?.full_name}</div>
+                                                <div style={{ fontSize: '0.7rem', color: 'var(--muted)', fontWeight: 600 }}>{inv.profiles?.department}</div>
                                             </div>
                                         </div>
-                                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-                                            <form action={acceptConnectionRequest.bind(null, inv.follower_id)} style={{ flex: 1 }}>
-                                                <Button size="small" style={{ width: '100%' }}>Accept</Button>
+                                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                                            <form action={acceptConnectionRequest.bind(null, inv.follower_id)}>
+                                                <Button size="small">Accept</Button>
                                             </form>
-                                            <form action={toggleFollow.bind(null, inv.follower_id, true)} style={{ flex: 1 }}>
-                                                <Button variant="ghost" size="small" style={{ width: '100%', border: '1px solid var(--surface-border)' }}>Ignore</Button>
+                                            <form action={toggleFollow.bind(null, inv.follower_id, true)}>
+                                                <Button variant="ghost" size="small">Skip</Button>
                                             </form>
                                         </div>
                                     </div>
@@ -118,30 +118,25 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                                 return (
                                     <div 
                                         key={p.id} 
-                                        className={`${styles.profileCard} animate-slide-up`}
-                                        style={{ animationDelay: `${index * 0.05}s` }}
+                                        className={styles.profileCard}
                                     >
                                         <Link href={`/profile/${p.id}`} style={{ textDecoration: 'none', color: 'inherit', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <Avatar 
                                                 name={p.full_name} 
-                                                size="medium" 
-                                                status="academic"
+                                                size="large" 
                                             />
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
-                                                <h3 className={styles.name}>{p.full_name}</h3>
-                                                <Sparkles size={14} className="text-secondary" />
-                                            </div>
+                                            <h3 className={styles.name}>{p.full_name}</h3>
                                             <p className={styles.dept}>{p.department}</p>
                                             
                                             <div className={styles.meta}>
                                                 <div className={styles.metaItem}>
-                                                    <GraduationCap size={14} />
-                                                    <span>{p.level || '100L'} Scholar</span>
+                                                    <GraduationCap size={12} />
+                                                    <span>{p.level || '100L'}</span>
                                                 </div>
                                             </div>
                                         </Link>
 
-                                        <div className={styles.actions} style={{ width: '100%' }}>
+                                        <div className={styles.actions}>
                                             <form action={toggleFollow.bind(null, p.id, !!status)}>
                                                 <Button 
                                                     variant={status === 'accepted' ? "outline" : status === 'pending' ? "ghost" : "primary"} 
@@ -151,17 +146,17 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                                                 >
                                                     {status === 'accepted' ? (
                                                         <>
-                                                            <Users size={16} />
+                                                            <Users size={14} />
                                                             Connected
                                                         </>
                                                     ) : status === 'pending' ? (
                                                         <>
-                                                            <Sparkles size={16} className="text-secondary" />
-                                                            Pending Discovery
+                                                            <Sparkles size={14} />
+                                                            Pending
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <UserPlus size={16} />
+                                                            <UserPlus size={14} />
                                                             Connect
                                                         </>
                                                     )}
@@ -171,11 +166,10 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                                     </div>
                                 );
                             })
-                        ) : (
+                         ) : (
                             <div className={styles.emptyState}>
-                                <Users size={48} />
-                                <h3>No scholars found</h3>
-                                <p>Try adjusting your search terms.</p>
+                                <Users size={32} />
+                                <p style={{ fontWeight: 800, marginTop: '1rem', fontSize: '0.9rem' }}>No scholars found.</p>
                             </div>
                         )}
                     </div>

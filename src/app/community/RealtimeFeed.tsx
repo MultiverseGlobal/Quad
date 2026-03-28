@@ -65,52 +65,47 @@ export default function RealtimeFeed({ initialPosts }: { initialPosts: Post[] })
     }, [supabase]);
 
     return (
-        <div className={styles.feedGrid}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {posts.map((post, index) => (
                 <article 
                     key={post.id} 
-                    className={`${styles.postCard} animate-slide-up`}
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    className={styles.postCard}
                 >
-                    <Link href={`/profile/${post.user_id}`} className={styles.authorInfo} style={{ textDecoration: 'none' }}>
-                        <Avatar 
-                            name={post.profiles?.full_name} 
-                            size="medium" 
-                            status="academic"
-                        />
-                        <div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                        <Link href={`/profile/${post.user_id}`} className={styles.authorInfo} style={{ textDecoration: 'none' }}>
+                            <Avatar 
+                                name={post.profiles?.full_name} 
+                                size="medium" 
+                            />
+                            <div>
                                 <div className={styles.authorName}>{post.profiles?.full_name || 'Anonymous Student'}</div>
-                                <Sparkles size={14} className="text-secondary" />
+                                <div className={styles.authorDept}>{post.profiles?.department || 'Verified Scholar'}</div>
                             </div>
-                            <div className={styles.authorDept}>{post.profiles?.department || 'Verified Scholar'}</div>
-                        </div>
-                        <div style={{ marginLeft: 'auto', fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 500 }}>
+                        </Link>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--muted)', fontWeight: 600, textTransform: 'uppercase' }}>
                             {new Date(post.created_at).toLocaleDateString()}
                         </div>
-                    </Link>
+                    </div>
                     
-                    <div className={styles.postContent}>
+                    <div className={styles.postContent} style={{ fontSize: '0.9rem', lineHeight: '1.5', color: 'var(--foreground)', marginBottom: '1rem' }}>
                         {post.content}
                     </div>
                     
-                    <div className={styles.postActions}>
-                        <Button variant="ghost" size="small" className={styles.action}>
-                            <Heart size={18} />
-                            <span>24</span>
-                        </Button>
-                        <Link href={`/community/${post.id}`}>
-                            <Button variant="ghost" size="small" className={styles.action}>
-                                <MessageCircle size={18} />
-                                <span>12</span>
-                            </Button>
-                        </Link>
-                        <Link href={`/community/${post.id}`} style={{ marginLeft: 'auto' }}>
-                            <Button variant="ghost" size="small" className={styles.action}>
-                                <Share2 size={18} />
-                                <span>View Discussion</span>
-                            </Button>
-                        </Link>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderTop: '1px solid var(--surface-border)', paddingTop: '0.75rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                            <button style={{ background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>
+                                <Heart size={14} />
+                                24
+                            </button>
+                            <Link href={`/community/${post.id}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', fontSize: '0.8rem', fontWeight: 600 }}>
+                                <MessageCircle size={14} />
+                                {index % 3 === 0 ? 8 : 2} Comments
+                            </Link>
+                        </div>
+                        <button style={{ marginLeft: 'auto', background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>
+                            <Share2 size={14} />
+                            Share
+                        </button>
                     </div>
                 </article>
             ))}

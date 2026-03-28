@@ -35,33 +35,31 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
             <div className={styles.opportunities}>
                 <div className="container">
                     <header className={styles.header}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                             <div>
-                                <h1 className="animate-slide-up">Opportunity Board</h1>
-                                <p className="animate-slide-up stagger-1" style={{ fontSize: '1.2rem', marginTop: '0.5rem' }}>
+                                <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--primary)', marginBottom: '0.25rem' }}>Opportunity Board</h1>
+                                <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>
                                     Find the perfect launchpad for your career while you study.
                                 </p>
                             </div>
-                            <Link href="/opportunities/new">
-                                <Button size="large">
-                                    <Briefcase size={20} />
+                            <Link href="/opportunities/new" style={{ textDecoration: 'none' }}>
+                                <Button>
+                                    <Briefcase size={18} />
                                     Post an Opening
                                 </Button>
                             </Link>
                         </div>
                         
-                        <div className={`${styles.filterArea} animate-slide-up stagger-2`}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                        <div className={styles.filterArea}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
                                 <form action="/opportunities" className={styles.searchBox}>
-                                    <div className={styles.searchIconWrapper}>
-                                        <Search size={20} />
-                                    </div>
+                                    <Search size={16} className={styles.searchIcon} />
                                     <input 
                                         name="query" 
                                         type="text" 
                                         defaultValue={query} 
                                         className={styles.searchInput} 
-                                        placeholder="Search jobs, companies, or skills..." 
+                                        placeholder="Search by role, company, or skill..." 
                                     />
                                     {typeFilter !== 'All' && <input type="hidden" name="type" value={typeFilter} />}
                                 </form>
@@ -86,10 +84,9 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                             jobs.map((job, i) => (
                                 <div 
                                     key={i} 
-                                    className={`${styles.jobCard} animate-slide-up`}
-                                    style={{ animationDelay: `${i * 0.05}s` }}
+                                    className={styles.jobCard}
                                 >
-                                    <div style={{ marginBottom: '1.5rem' }}>
+                                    <div style={{ marginBottom: '1.25rem' }}>
                                         <Avatar name={job.company} size="medium" />
                                     </div>
                                     <h3 className={styles.jobTitle}>{job.title}</h3>
@@ -99,36 +96,21 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                                         <div className={`${styles.tag} ${styles[job.type?.toLowerCase() || 'gig']}`}>
                                             {job.type || 'Gig'}
                                         </div>
-                                        <div className={styles.tag}><MapPin size={14} /> {job.location || 'Remote'}</div>
-                                        <div className={styles.tag}><DollarSign size={14} /> {job.salary || 'Competitive'}</div>
-                                        <div className={styles.tag}><Clock size={14} /> {new Date(job.created_at).toLocaleDateString()}</div>
+                                        <div className={styles.tag}><MapPin size={12} /> {job.location || 'Remote'}</div>
+                                        <div className={styles.tag}><DollarSign size={12} /> {job.salary || 'Competitive'}</div>
                                     </div>
 
-                                    <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid var(--surface-border)' }}>
-                                        <Link href={`/opportunities/${job.id}`}>
-                                            <Button variant="outline" style={{ width: '100%' }}>View & Apply Now</Button>
+                                    <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: '1px solid var(--surface-border)' }}>
+                                        <Link href={`/opportunities/${job.id}`} style={{ textDecoration: 'none' }}>
+                                            <Button variant="outline" style={{ width: '100%' }}>View Brief</Button>
                                         </Link>
                                     </div>
                                 </div>
                             ))
                         ) : (
-                            <div className={styles.jobCard} style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '6rem 2rem' }}>
-                                <div style={{ display: 'inline-flex', padding: '2rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-xl)', color: 'var(--muted)', marginBottom: '2rem' }}>
-                                    <Briefcase size={64} />
-                                </div>
-                                <h3 style={{ color: 'var(--primary)', marginBottom: '1rem', fontSize: '1.75rem', fontWeight: 800 }}>
-                                    {query || typeFilter !== 'All' ? 'No opportunities match your search' : 'The board is waiting for you'}
-                                </h3>
-                                <p style={{ color: 'var(--muted)', maxWidth: '500px', margin: '0 auto', fontSize: '1.2rem' }}>
-                                    {query || typeFilter !== 'All' 
-                                        ? 'Try widening your search or picking a different category to see more results.' 
-                                        : 'Be the first to share an opportunity with your fellow students.'}
-                                </p>
-                                {(query || typeFilter !== 'All') && (
-                                    <Link href="/opportunities" style={{ marginTop: '2.5rem', display: 'inline-block' }}>
-                                        <Button variant="outline">Reset All Filters</Button>
-                                    </Link>
-                                )}
+                            <div className={styles.emptyState}>
+                                <Briefcase size={32} />
+                                <p style={{ fontWeight: 600, marginTop: '1rem' }}>No opportunities found matching your search.</p>
                             </div>
                         )}
                     </div>

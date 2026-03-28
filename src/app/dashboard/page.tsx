@@ -57,78 +57,78 @@ export default async function DashboardPage() {
             <div className={styles.dashboard}>
                 <div className="container">
                     <header className={styles.header}>
-                        <div className={styles.welcome} style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                            <Avatar name={profile?.full_name} size="large" status="academic" />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                            <Avatar name={profile?.full_name} size="medium" />
                             <div>
-                                <h1 style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--primary)', fontFamily: 'var(--font-display)', marginBottom: '0.25rem' }}>
-                                    Welcome back, {profile?.full_name?.split(' ')[0] || 'Scholar'}
+                                <h1 className={styles.welcomeTitle}>
+                                    Welcome, {profile?.full_name?.split(' ')[0] || 'Scholar'}
                                 </h1>
-                                <p style={{ fontSize: '1.1rem', color: 'var(--muted)', fontWeight: 500 }}>
-                                    {profile?.department || 'Veritas University Student'} • Level {profile?.level || '100L'}
+                                <p className={styles.welcomeSub}>
+                                    {profile?.department || 'Veritas University'} • Level {profile?.level || '100L'}
                                 </p>
                             </div>
                         </div>
                         <div className={styles.actions}>
-                            <Button variant="ghost" className={styles.notifBtn}>
-                                <Bell size={20} />
+                            <Button variant="ghost" size="small">
+                                <Bell size={18} />
                             </Button>
                         </div>
                     </header>
 
                     <div className={styles.grid}>
                         <main className={styles.mainContent}>
-                            <div className={`${styles.card} animate-slide-up stagger-1`}>
+                            <div className={styles.card}>
                                 <h2 className={styles.sectionTitle}>
-                                    <TrendingUp size={24} className="text-secondary" />
+                                    <TrendingUp size={16} className="text-primary" />
                                     Department Pulse
                                 </h2>
                                 <div className={styles.feedPlaceholder}>
                                     {recentPost.data ? (
                                         <div style={{ width: '100%', textAlign: 'left' }}>
-                                            <p style={{ fontSize: '1.25rem', fontStyle: 'italic', fontWeight: 500, color: 'var(--primary)', lineHeight: 1.5 }}>"{recentPost.data.content}"</p>
-                                            <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                            <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--primary)', lineHeight: 1.5 }}>"{recentPost.data.content}"</p>
+                                            <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                                 <Avatar name="Veritas Scholar" size="small" />
-                                                <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: 600 }}>Fresh in {profile?.department}</p>
+                                                <p style={{ fontSize: '0.75rem', color: 'var(--muted)', fontWeight: 700 }}>Fresh in {profile?.department}</p>
                                             </div>
                                         </div>
                                     ) : (
-                                        <>
-                                            <MessageSquare size={48} strokeWidth={1.5} />
-                                            <p style={{ fontWeight: 500 }}>No new updates in {profile?.department} yet.</p>
-                                            <Link href="/community/new">
-                                                <Button variant="subtle">Start a Conversation</Button>
+                                        <div style={{ textAlign: 'center' }}>
+                                            <MessageSquare size={32} className="text-muted" style={{ marginBottom: '1rem' }} />
+                                            <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--muted)' }}>No new updates in {profile?.department}.</p>
+                                            <Link href="/community" style={{ marginTop: '1rem', display: 'inline-block' }}>
+                                                <Button variant="outline" size="small">Join Community</Button>
                                             </Link>
-                                        </>
+                                        </div>
                                     )}
                                 </div>
                             </div>
 
-                            <div className={`${styles.card} animate-slide-up stagger-2`}>
+                            <div className={styles.card}>
                                 <h2 className={styles.sectionTitle}>
-                                    <Briefcase size={24} className="text-secondary" />
-                                    Fresh Opportunities
+                                    <Briefcase size={16} className="text-primary" />
+                                    Verified Opportunities
                                 </h2>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                     {recentOpportunities.data && recentOpportunities.data.length > 0 ? (
                                         recentOpportunities.data.map((job) => (
-                                            <div key={job.id} style={{ padding: '1.5rem', background: 'var(--surface-muted)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.2s ease' }}>
+                                            <div key={job.id} style={{ padding: '1rem', background: 'var(--surface-muted)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-sm)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 <div>
-                                                    <h4 style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '1.1rem' }}>{job.title}</h4>
-                                                    <p style={{ fontSize: '0.875rem', color: 'var(--muted)', fontWeight: 500 }}>{job.company} • Verified Opportunity</p>
+                                                    <h4 style={{ fontWeight: 800, color: 'var(--primary)', fontSize: '0.9rem' }}>{job.title}</h4>
+                                                    <p style={{ fontSize: '0.75rem', color: 'var(--muted)', fontWeight: 600 }}>{job.company}</p>
                                                 </div>
-                                                <Link href={`/opportunities/${job.id}`}>
-                                                    <Button variant="outline" size="small">View Brief</Button>
+                                                <Link href={`/opportunities`}>
+                                                    <Button variant="ghost" size="small">View</Button>
                                                 </Link>
                                             </div>
                                         ))
                                     ) : (
-                                        <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '2rem', border: '2px dashed var(--surface-border)', borderRadius: 'var(--radius-md)' }}>No new opportunities right now.</p>
+                                        <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '2rem', fontSize: '0.85rem', fontWeight: 600 }}>No new opportunities right now.</p>
                                     )}
                                 </div>
                             </div>
                         </main>
 
-                        <aside className={`${styles.sidebar} animate-slide-up stagger-3`}>
+                        <aside className={styles.sidebar}>
                             <div className={styles.statGrid}>
                                 <div className={styles.statCard}>
                                     <span className={styles.statValue}>154</span>
@@ -136,31 +136,29 @@ export default async function DashboardPage() {
                                 </div>
                                 <div className={styles.statCard}>
                                     <span className={styles.statValue}>12</span>
-                                    <span className={styles.statLabel}>Gigs Found</span>
+                                    <span className={styles.statLabel}>Active Gigs</span>
                                 </div>
                             </div>
 
                             <div className={styles.card}>
-                                <h3 className={styles.sectionTitle} style={{ fontSize: '1.25rem' }}>
-                                    <Users size={20} />
-                                    University Links
+                                <h3 className={styles.sectionTitle}>
+                                    Institutional Links
                                 </h3>
                                 <nav className={styles.quickActions}>
-                                    <Link href="/profile" style={{ width: '100%', textDecoration: 'none' }}>
-                                        <Button variant="ghost" className={styles.actionButton}>My Student Profile</Button>
+                                    <Link href="/profile" style={{ textDecoration: 'none' }}>
+                                        <button className={styles.actionButton}>My Student Profile</button>
                                     </Link>
-                                    <Link href="/profile" style={{ width: '100%', textDecoration: 'none' }}>
-                                        <Button variant="ghost" className={styles.actionButton}>My Loops Shop</Button>
+                                    <Link href="/profile" style={{ textDecoration: 'none' }}>
+                                        <button className={styles.actionButton}>Institutional Loops</button>
                                     </Link>
-                                    <a href="https://portal.veritas.edu.ng/" target="_blank" rel="noopener noreferrer" style={{ width: '100%', textDecoration: 'none' }}>
-                                        <Button variant="ghost" className={styles.actionButton}>Veritas University Portal</Button>
+                                    <a href="https://portal.veritas.edu.ng/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                                        <button className={styles.actionButton}>University Portal</button>
                                     </a>
                                     <div style={{ height: '1px', background: 'var(--surface-border)', margin: '0.5rem 0' }}></div>
                                     <form action={signOut} style={{ width: '100%' }}>
-                                        <Button variant="ghost" className={styles.actionButton} style={{ color: '#ef4444' }}>
-                                            <LogOut size={18} />
+                                        <button className={`${styles.actionButton} ${styles.logoutBtn}`}>
                                             Sign Out
-                                        </Button>
+                                        </button>
                                     </form>
                                 </nav>
                             </div>

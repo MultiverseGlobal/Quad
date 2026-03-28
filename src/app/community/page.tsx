@@ -8,6 +8,7 @@ import {
     MessageCircle, 
     Share2, 
     Plus,
+    User,
     Sparkles,
     Search
 } from 'lucide-react';
@@ -49,6 +50,14 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
 
     const { data: posts } = await postsQuery;
 
+    const { data: { user } } = await supabase.auth.getUser();
+
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user?.id)
+        .single();
+
     const categories = ["All Feed", "Computer Science", "Economics", "Law", "Mass Communication"];
     
     return (
@@ -56,71 +65,108 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
             <Navbar />
             <div className={styles.feed}>
                 <div className="container">
-                    <header className={styles.header}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
-                            <div>
-                                <h1>Community Pulse</h1>
-                                <p style={{ color: 'var(--muted)', fontWeight: 500 }}>Stay connected with the heartbeat of Veritas University.</p>
-                            </div>
-                            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                                <form action="/community" className={styles.searchWrapper}>
-                                    <Search className={styles.searchIcon} size={18} />
-                                    <input 
-                                        name="query" 
-                                        type="text" 
-                                        placeholder="Search discussions..." 
-                                        className={styles.searchInput}
-                                        defaultValue={query}
-                                    />
-                                    {category && <input type="hidden" name="category" value={category} />}
-                                </form>
-                                <Link href="/community/new">
-                                    <Button size="large">
-                                        <Plus size={20} />
-                                        Launch Discussion
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.filterBar}>
-                            {categories.map((cat, i) => (
-                                <Link 
-                                    key={i} 
-                                    href={`/community?category=${encodeURIComponent(cat)}${query ? `&query=${encodeURIComponent(query)}` : ''}`}
-                                    className={styles.categoryLink}
-                                >
-                                    <div className={`${styles.filterChip} ${category === cat || (!category && cat === 'All Feed') ? styles.activeChip : ''}`}>
-                                        {cat}
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </header>
-
-                    <div className={styles.postList}>
-                        {posts && posts.length > 0 ? (
-                            <RealtimeFeed initialPosts={posts as any} />
-                        ) : (
-                            <div className={styles.postCard} style={{ textAlign: 'center', padding: '5rem 2rem' }}>
-                                <div style={{ display: 'inline-flex', padding: '1.5rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-xl)', color: 'var(--muted)', marginBottom: '1.5rem' }}>
-                                    <MessageCircle size={48} />
+                    <div className={styles.layoutGrid}>
+                        {/* Left Sidebar: Profile & Nav */}
+                        <aside className={styles.sidebar}>
+                            <div className={styles.sidebarCard}>
+                                <div className={styles.profileMini}>
+                                    <Avatar name={profile?.full_name} size="large" />
+                                    <div className={styles.profileName}>{profile?.full_name}</div>
+                                    <div className={styles.profileDept}>{profile?.department}</div>
                                 </div>
-                                <h3 style={{ color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '1.5rem', fontWeight: 800 }}>
-                                    {query || (category && category !== 'All Feed') ? 'No discussions found' : 'The feed is quiet...'}
-                                </h3>
-                                <p style={{ color: 'var(--muted)', maxWidth: '400px', margin: '0 auto', fontSize: '1.1rem' }}>
-                                    {query || (category && category !== 'All Feed') 
-                                        ? 'Try adjusting your search terms or category filter to find what you are looking for.' 
-                                        : 'Be the first to start a conversation and inspire your university community.'}
-                                </p>
-                                {(query || (category && category !== 'All Feed')) && (
-                                    <Link href="/community" style={{ marginTop: '2rem', display: 'inline-block' }}>
-                                        <Button variant="outline">Clear All Filters</Button>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                    <Link href="/profile" className={styles.categoryLink}>
+                                        <User size={16} />
+                                        Your Profile
                                     </Link>
+                                    <Link href="/network" className={styles.categoryLink}>
+                                        <Sparkles size={16} />
+                                        Scholar Network
+                                    </Link>
+                                </div>
+                            </div>
+                            
+                            <div className={styles.sidebarCard}>
+                                <h4 className={styles.widgetTitle}>Departments</h4>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                    {categories.map((cat, i) => (
+                                        <Link 
+                                            key={i} 
+                                            href={`/community?category=${encodeURIComponent(cat)}${query ? `&query=${encodeURIComponent(query)}` : ''}`}
+                                            className={`${styles.categoryLink} ${category === cat || (!category && cat === 'All Feed') ? styles.activeCategory : ''}`}
+                                        >
+                                            {cat}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </aside>
+
+                        {/* Center: Feed Column */}
+                        <main className={styles.feedColumn}>
+                            <header className={styles.header}>
+                                <div>
+                                    <h2 className={styles.headerTitle}>Community Pulse</h2>
+                                    <p className={styles.headerSub}>The institutional discussion stream for Veritas University.</p>
+                                </div>
+                                
+                                <div className={styles.toolbar}>
+                                    <form action="/community" className={styles.searchWrapper}>
+                                        <Search className={styles.searchIcon} size={14} />
+                                        <input 
+                                            name="query" 
+                                            type="text" 
+                                            placeholder="Search discussions..." 
+                                            className={styles.searchInput}
+                                            defaultValue={query}
+                                        />
+                                        {category && <input type="hidden" name="category" value={category} />}
+                                    </form>
+                                    <Link href="/community/new" style={{ textDecoration: 'none' }}>
+                                        <Button>
+                                            <Plus size={16} />
+                                            New Post
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </header>
+
+                            <div className={styles.postList}>
+                                {posts && posts.length > 0 ? (
+                                    <RealtimeFeed initialPosts={posts as any} />
+                                ) : (
+                                    <div className={styles.emptyState}>
+                                        <MessageCircle size={32} />
+                                        <p style={{ fontWeight: 600, marginTop: '1rem' }}>No discussions found in this stream.</p>
+                                    </div>
                                 )}
                             </div>
-                        )}
+                        </main>
+
+                        {/* Right Sidebar: Discovery */}
+                        <aside className={styles.widgets}>
+                            <div className={styles.sidebarCard}>
+                                <h4 className={styles.widgetTitle}>Campus Connect</h4>
+                                <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '1rem' }}>Meet fellow scholars in your department.</p>
+                                <Link href="/network" style={{ textDecoration: 'none' }}>
+                                    <Button variant="outline" style={{ width: '100%' }}>Explore Directory</Button>
+                                </Link>
+                            </div>
+                            
+                            <div className={styles.sidebarCard}>
+                                <h4 className={styles.widgetTitle}>Trending Gigs</h4>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                    <div className={styles.trendingItem}>
+                                        <div className={styles.trendingTitle}>Research Assistant</div>
+                                        <div className={styles.trendingMeta}>Economics • $25/hr</div>
+                                    </div>
+                                    <div className={styles.trendingItem}>
+                                        <div className={styles.trendingTitle}>Visual Branding</div>
+                                        <div className={styles.trendingMeta}>Design • $50/gig</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </div>

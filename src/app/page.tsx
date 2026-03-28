@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -10,7 +11,9 @@ import {
   ArrowRight,
   ShieldCheck,
   GraduationCap,
-  TrendingUp
+  TrendingUp,
+  Globe,
+  Zap
 } from "lucide-react";
 
 export default function Home() {
@@ -21,80 +24,83 @@ export default function Home() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.badge}>
-            <Sparkles size={16} />
-            <span>The Professional Network for Veritas Scholars</span>
+            <Sparkles size={14} />
+            <span>Campus Infrastructure for Veritas Scholars</span>
           </div>
           <h1 className={`${styles.title} animate-slide-up stagger-1`}>
-            The <span className={styles.highlight}>LinkedIn</span> of <br /> Campus Life
+            The <span className={styles.highlight}>Professional Pulse</span> <br /> of Campus Life
           </h1>
           <p className={`${styles.subtitle} animate-slide-up stagger-2`}>
-            The only place where your academic achievements meet professional opportunities. 
-            Connect with peers, find gigs, and showcase your Veritas journey.
+            Quad is the definitive institutional network for Veritas University. 
+            Connect with peers, discover exclusive opportunities, and build your scholarly legacy.
           </p>
           <div className={`${styles.ctaGroup} animate-slide-up stagger-3`}>
             <Link href="/auth/signup">
               <Button size="large">
-                Join the Quad
-                <ArrowRight size={20} />
+                Create Scholar Account
+                <ArrowRight size={18} />
               </Button>
             </Link>
             <Link href="/community">
-              <Button variant="outline" size="large">Explore Feed</Button>
+              <Button variant="outline" size="large">Explore Pulse Feed</Button>
             </Link>
           </div>
         </section>
 
-        {/* Bento Grid Features */}
+        {/* Bento Grid Features - Redefined for Infrastructure Feel */}
         <section className={styles.features}>
           <div className="container">
-            <h2 style={{ textAlign: 'center', fontSize: '3rem', fontWeight: 900, marginBottom: '1rem', color: 'var(--primary)', fontFamily: 'var(--font-display)' }}>Empowering Your Journey</h2>
-            <p style={{ textAlign: 'center', color: 'var(--muted)', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem', fontSize: '1.1rem' }}>
-              Everything you need to thrive in your department and beyond.
-            </p>
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--primary)', marginBottom: '1rem' }}>Built for the Modern Scholar</h2>
+                <p style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem', lineHeight: '1.6' }}>
+                  A unified platform designed to accelerate your academic and professional journey within the Veritas ecosystem.
+                </p>
+            </div>
             
             <div className={styles.featureGrid}>
               <div className={`${styles.featureCard} ${styles['grid-main']} animate-slide-up stagger-1`}>
-                <div className={styles.iconWrapper}><Users size={28} /></div>
-                <h3 className={styles.featureTitle}>Scholars' Network</h3>
+                <div className={styles.iconWrapper}><Globe size={24} /></div>
+                <h3 className={styles.featureTitle}>The Scholars' Network</h3>
                 <p className={styles.featureDesc}>
-                  Connect with students across all departments. Build your professional circle before you graduate. 
-                  Share insights and collaborate on campus-wide initiatives.
+                  Our institutional directory connects you with thousands of verified peers across all departments. 
+                  Collaborate, mentor, and be mentored by the best minds on campus.
                 </p>
                 <div className={styles.decorContainer}>
-                    <Users size={160} strokeWidth={0.5} />
+                    <Users size={180} strokeWidth={0.5} />
                 </div>
               </div>
 
               <div className={`${styles.featureCard} ${styles['grid-side']} animate-slide-up stagger-2`}>
-                <div className={styles.iconWrapper}><Briefcase size={28} /></div>
-                <h3 className={styles.featureTitle}>Gigs & Jobs</h3>
+                <div className={styles.iconWrapper}><Briefcase size={24} /></div>
+                <h3 className={styles.featureTitle}>Career Launchpad</h3>
                 <p className={styles.featureDesc}>
-                  Exclusive opportunities tailored to Veritas students. Find your next internship or side gig.
+                  Access high-impact internships and campus gigs tailored specifically to your department.
                 </p>
                 <div className={styles.decorContainer}>
-                    <TrendingUp size={120} strokeWidth={0.5} />
+                    <TrendingUp size={140} strokeWidth={0.5} />
                 </div>
               </div>
 
               <div className={`${styles.featureCard} ${styles['grid-half']} animate-slide-up stagger-3`}>
-                <div className={styles.iconWrapper}><GraduationCap size={28} /></div>
-                <h3 className={styles.featureTitle}>Academic Pulse</h3>
+                <div className={styles.iconWrapper}><Zap size={24} /></div>
+                <h3 className={styles.featureTitle}>Pulse Engine</h3>
                 <p className={styles.featureDesc}>
-                  Stay updated with your department's heartbeat. Share resources, collaborate on projects, and lead the conversation.
+                  Real-time departmental discussions and campus news. Stay in the loop with what matters in your academic circle.
                 </p>
               </div>
 
               <div className={`${styles.featureCard} ${styles['grid-half']} animate-slide-up stagger-1`}>
-                <div className={styles.iconWrapper}><Sparkles size={28} /></div>
+                <div className={styles.iconWrapper}><ShoppingBag size={24} /></div>
                 <h3 className={styles.featureTitle}>Loops Marketplace</h3>
                 <p className={styles.featureDesc}>
-                  The first campus-first marketplace. Buy and sell with trusted peers in a secure, student-only environment.
+                  The first student-first marketplace. Transaction-ready infrastructure for campus commerce and vendor services.
                 </p>
               </div>
             </div>
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

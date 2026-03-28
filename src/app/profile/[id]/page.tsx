@@ -41,38 +41,34 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
     return (
         <>
             <Navbar />
-            <div className={`${styles.profile} animate-fade-in`}>
+            <div className={styles.profile}>
                 <div className="container">
-                    <Link href="/network" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--muted)', textDecoration: 'none', marginBottom: '2rem', fontWeight: 600 }}>
-                        <ArrowLeft size={18} />
+                    <Link href="/network" className={styles.backLink} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', textDecoration: 'none', marginBottom: '1.5rem', fontWeight: 600, fontSize: '0.9rem' }}>
+                        <ArrowLeft size={16} />
                         Back to Network
                     </Link>
 
                     <div className={styles.profileWrapper}>
-                        <aside className={`${styles.sidebar} animate-slide-up`}>
+                        <aside className={styles.sidebar}>
                             <div className={styles.profileCard}>
                                 <Avatar 
                                     name={profile.full_name} 
                                     size="xl" 
-                                    status="academic"
-                                    style={{ margin: '0 auto 2rem' }}
+                                    style={{ margin: '0 auto 1.5rem' }}
                                 />
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-                                    <h1 className={styles.name}>{profile.full_name}</h1>
-                                    <Sparkles size={20} className="text-secondary" />
-                                </div>
+                                <h1 className={styles.name}>{profile.full_name}</h1>
                                 <p className={styles.deptInfo}>{profile.department || 'Veritas Scholar'}</p>
                                 <p className={styles.bio}>
                                     {profile.bio || 'Professional student active on Quad. Connect with me for collaborations!'}
                                 </p>
                                 
-                                <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+                                <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
                                     <Button style={{ flex: 1 }}>
-                                        <UserPlus size={18} />
+                                        <UserPlus size={16} />
                                         Connect
                                     </Button>
                                     <Button variant="outline" style={{ flex: 1 }}>
-                                        <MessageSquare size={18} />
+                                        <MessageSquare size={16} />
                                         Message
                                     </Button>
                                 </div>
@@ -80,43 +76,52 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
                         </aside>
 
                         <main className={styles.mainSection}>
-                            <div className={`${styles.contentCard} animate-slide-up stagger-1`}>
-                                <h2 className={styles.cardTitle}>Academic Spotlight</h2>
-                                <div className={styles.infoGrid}>
-                                    <div className={styles.infoItem}>
-                                        <GraduationCap className={styles.infoIcon} />
-                                        <div>
-                                            <label>Current Standing</label>
-                                            <p>{profile.level || '100L'} Scholar</p>
-                                        </div>
+                            <div className={styles.contentCard}>
+                                <h2 className={styles.cardTitle}>
+                                    <GraduationCap size={18} />
+                                    Academic Spotlight
+                                </h2>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 800, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Current Standing</label>
+                                        <p style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '1rem' }}>{profile.level || '100L'} Scholar</p>
                                     </div>
-                                    <div className={styles.infoItem}>
-                                        <Mail className={styles.infoIcon} />
-                                        <div>
-                                            <label>University Email</label>
-                                            <p>{profile.email || 'Protected'}</p>
-                                        </div>
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 800, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>University Email</label>
+                                        <p style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '1rem' }}>{profile.email || 'Protected'}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className={`${styles.contentCard} animate-slide-up stagger-2`} style={{ marginTop: '2rem' }}>
-                                <h2 className={styles.cardTitle}>Social Loops</h2>
-                                <div className={styles.socialLinks}>
+                            <div className={styles.contentCard}>
+                                <h2 className={styles.cardTitle}>
+                                    <Sparkles size={18} />
+                                    Social Loops
+                                </h2>
+                                <div style={{ display: 'grid', gap: '0.75rem' }}>
                                     {profile.website && (
-                                        <a href={profile.website} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-                                            <LinkIcon size={20} />
-                                            <span>Portfolio</span>
+                                        <a href={profile.website} target="_blank" rel="noopener noreferrer" className={styles.linkItem}>
+                                            <LinkIcon size={18} />
+                                            <div className={styles.linkInfo}>
+                                                <h4>Professional Portfolio</h4>
+                                                <p>{profile.website}</p>
+                                            </div>
                                             <ExternalLink size={14} style={{ marginLeft: 'auto', opacity: 0.5 }} />
                                         </a>
                                     )}
-                                    <div className={styles.socialLink}>
-                                        <Instagram size={20} />
-                                        <span>@scholar_quad</span>
+                                    <div className={styles.linkItem}>
+                                        <Instagram size={18} />
+                                        <div className={styles.linkInfo}>
+                                            <h4>Instagram</h4>
+                                            <p>@scholar_quad</p>
+                                        </div>
                                     </div>
-                                    <div className={styles.socialLink}>
-                                        <Twitter size={20} />
-                                        <span>@veritas_student</span>
+                                    <div className={styles.linkItem}>
+                                        <Twitter size={18} />
+                                        <div className={styles.linkInfo}>
+                                            <h4>Twitter / X</h4>
+                                            <p>@veritas_student</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

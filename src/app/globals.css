@@ -1,45 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Premium Brand Palette - LinkedIn Professional with Quad Spirit */
-  --primary: hsl(212, 100%, 15%); /* Deepest Blue */
-  --primary-glow: hsla(212, 100%, 15%, 0.1);
-  --secondary: hsl(142, 70%, 38%); /* More professional green */
-  --secondary-glow: hsla(142, 70%, 38%, 0.1);
+  /* Premium Brand Palette - Institutional Professionalism */
+  --primary: hsl(222, 47%, 11%); /* Deep Ink Blue */
+  --primary-glow: hsla(222, 47%, 11%, 0.05);
+  --secondary: hsl(142, 70%, 30%); /* Forest Institutional Green */
+  --secondary-glow: hsla(142, 70%, 30%, 0.05);
   
-  /* Modern Professional Neutrals */
-  --background: hsl(210, 50%, 98%);
-  --foreground: hsl(221, 50%, 8%);
+  /* Modern Professional Neutrals (Zinc/Slate influence) */
+  --background: hsl(210, 40%, 98%);
+  --foreground: hsl(215, 25%, 15%);
   --surface: hsl(0, 0%, 100%);
-  --surface-muted: hsl(210, 40%, 96%);
-  --surface-border: hsla(221, 50%, 8%, 0.06);
-  --border-focus: hsla(212, 100%, 15%, 0.2);
+  --surface-muted: hsl(210, 30%, 96%);
+  --surface-border: rgba(0, 0, 0, 0.08);
+  --border-focus: hsla(222, 47%, 11%, 0.15);
   
   /* Glassmorphism Tokens - More subtle for professional feel */
   --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(255, 255, 255, 0.5);
   --glass-blur: blur(12px);
   
-  /* Layering & Depth (Elevated shadows) */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.8rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 2rem;
+  /* Structured System Tokens - Sharper for "Infrastructure" feel */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
   
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.02);
-  --shadow-md: 0 12px 30px -4px rgba(0,0,0,0.04), 0 4px 12px -4px rgba(0,0,0,0.02);
-  --shadow-lg: 0 24px 60px -12px rgba(0,0,0,0.08), 0 8px 24px -12px rgba(0,0,0,0.05);
+  /* Subtle Elevation - No more heavy shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.04), 0 4px 6px -2px rgba(0,0,0,0.02);
   --shadow-inner: inset 0 2px 4px rgba(0,0,0,0.02);
   
   /* Fluids & Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Outfit', sans-serif;
+  --font-display: 'Inter', sans-serif; /* Moving to Inter for all to stay professional */
   
   /* Elevation system */
-  --elev-1: 0 1px 3px rgba(0,0,0,0.1);
-  --elev-2: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-  --elev-3: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --elev-1: 0 1px 2px rgba(0,0,0,0.05);
+  --elev-2: 0 4px 6px rgba(0,0,0,0.02);
+  --elev-3: 0 10px 15px rgba(0,0,0,0.04);
 }
 
 [data-theme='dark'] {

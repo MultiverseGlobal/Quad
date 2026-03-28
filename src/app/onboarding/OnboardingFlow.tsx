@@ -47,7 +47,7 @@ export default function OnboardingFlow() {
     };
 
     return (
-        <div className="container" style={{ maxWidth: '800px' }}>
+        <div className="container" style={{ maxWidth: '640px' }}>
             <header className={styles.header}>
                 <div className={styles.stepper}>
                     <div className={`${styles.step} ${step >= 1 ? styles.active : ''}`}>1</div>
@@ -56,27 +56,29 @@ export default function OnboardingFlow() {
                     <div className={`${styles.line} ${step >= 3 ? styles.activeLine : ''}`}></div>
                     <div className={`${styles.step} ${step >= 3 ? styles.active : ''}`}>3</div>
                 </div>
-                <h1>{step === 1 ? "Your Interests" : step === 2 ? "Academic Path" : "Get Connected"}</h1>
-                <p>
-                    {step === 1 ? "Select topics you'd like to see in your feed." : 
-                     step === 2 ? "Help us tailor opportunities to your journey." : 
-                     "Final step to join the community."}
+                <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', marginBottom: '0.25rem' }}>
+                    {step === 1 ? "Scholar Interests" : step === 2 ? "Academic Path" : "Institutional Hubs"}
+                </h1>
+                <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: 600 }}>
+                    {step === 1 ? "Customize your research and social feed." : 
+                     step === 2 ? "Define your journey through the university." : 
+                     "Join verified departmental communities."}
                 </p>
             </header>
 
             <div className={styles.card}>
                 <div className={styles.stepContent}>
                     {error && (
-                        <div style={{ padding: '1rem', background: '#fee2e2', color: '#b91c1c', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 600 }}>
-                            <AlertCircle size={18} />
+                        <div style={{ padding: '0.75rem', background: '#ff000008', color: 'var(--error)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: 700, border: '1px solid #ff000015' }}>
+                            <AlertCircle size={14} />
                             {error}
                         </div>
                     )}
                     {step === 1 && (
                         <>
-                            <div className={styles.iconCircle}><Sparkles size={32} /></div>
-                            <h3>What Sparks Your Interest?</h3>
-                            <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>Choose at least 3 topics.</p>
+                            <div className={styles.iconCircle}><Sparkles size={24} /></div>
+                            <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--primary)', marginBottom: '0.25rem' }}>Areas of Research</h3>
+                            <p style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '1.5rem' }}>Choose 3 topics to initialize your feed.</p>
                             <div className={styles.interestGrid}>
                                 {INTERESTS.map((item) => (
                                     <button 
@@ -93,23 +95,25 @@ export default function OnboardingFlow() {
 
                     {step === 2 && (
                         <>
-                            <div className={styles.iconCircle}><GraduationCap size={32} /></div>
-                            <h3>Expected Graduation?</h3>
-                            <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>We'll show you relevant internships and roles.</p>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', width: '100%', maxWidth: '400px' }}>
+                            <div className={styles.iconCircle}><GraduationCap size={24} /></div>
+                            <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--primary)', marginBottom: '0.25rem' }}>Graduation Timeline</h3>
+                            <p style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '1.5rem' }}>This helps refine your career opportunities.</p>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', width: '100%' }}>
                                 {['2024', '2025', '2026', '2027', '2028', 'Later'].map(y => (
                                     <button 
                                         key={y}
                                         onClick={() => setYear(y)}
                                         style={{ 
-                                            padding: '1rem', 
-                                            borderRadius: 'var(--radius-md)', 
+                                            padding: '0.75rem', 
+                                            borderRadius: 'var(--radius-sm)', 
                                             border: '1px solid var(--surface-border)',
-                                            background: year === y ? 'var(--primary-glow)' : 'var(--background)',
+                                            background: year === y ? 'var(--surface-muted)' : '#fff',
                                             borderColor: year === y ? 'var(--primary)' : 'var(--surface-border)',
-                                            color: year === y ? 'var(--primary)' : 'var(--foreground)',
+                                            color: year === y ? 'var(--primary)' : 'var(--muted)',
+                                            fontSize: '0.85rem',
                                             fontWeight: 700,
-                                            cursor: 'pointer'
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s'
                                         }}
                                     >
                                         Class of {y}
@@ -121,23 +125,23 @@ export default function OnboardingFlow() {
 
                     {step === 3 && (
                         <>
-                            <div className={styles.iconCircle}><Users size={32} /></div>
-                            <h3>Join Shared Communities</h3>
-                            <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>We've found 4 active groups in your department.</p>
-                            <div style={{ width: '100%', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <div style={{ padding: '1.25rem', background: 'var(--background)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div className={styles.iconCircle}><Users size={24} /></div>
+                            <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--primary)', marginBottom: '0.25rem' }}>Institutional Network</h3>
+                            <p style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '1.5rem' }}>Join communities within your department.</p>
+                            <div style={{ width: '100%', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <div style={{ padding: '1rem', background: 'var(--surface-muted)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <div>
-                                        <h4 style={{ fontWeight: 700 }}>Departmental Hub</h4>
-                                        <p style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>242 Fellow Scholars</p>
+                                        <h4 style={{ fontWeight: 800, fontSize: '0.85rem', color: 'var(--primary)' }}>Academic Hub</h4>
+                                        <p style={{ fontSize: '0.7rem', color: 'var(--muted)', fontWeight: 600 }}>Verified Peers</p>
                                     </div>
-                                    <Button variant="ghost" size="small" style={{ border: '1px solid var(--surface-border)' }}>Joined</Button>
+                                    <Button variant="ghost" size="small">Joined</Button>
                                 </div>
-                                <div style={{ padding: '1.25rem', background: 'var(--background)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div style={{ padding: '1rem', background: '#fff', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <div>
-                                        <h4 style={{ fontWeight: 700 }}>Innovation & Tech</h4>
-                                        <p style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>1.2k Students</p>
+                                        <h4 style={{ fontWeight: 800, fontSize: '0.85rem', color: 'var(--primary)' }}>Innovation Guild</h4>
+                                        <p style={{ fontSize: '0.7rem', color: 'var(--muted)', fontWeight: 600 }}>Public Group</p>
                                     </div>
-                                    <Button size="small">Join Group</Button>
+                                    <Button size="small">Join</Button>
                                 </div>
                             </div>
                         </>
@@ -147,17 +151,16 @@ export default function OnboardingFlow() {
                 <div className={styles.footer}>
                     <Button 
                         onClick={handleNext} 
-                        className={styles.nextBtn}
+                        style={{ width: '100%' }}
                         disabled={(step === 1 && selectedInterests.length < 3) || isPending}
                     >
-                        {isPending ? "Finalizing..." : step === 3 ? "Complete Onboarding" : "Continue"}
-                        {!isPending && <Rocket size={18} style={{ marginLeft: '0.5rem' }} />}
+                        {isPending ? "Configuring workspace..." : step === 3 ? "Complete Registration" : "Continue Access"}
                     </Button>
                 </div>
             </div>
             
             <p className={styles.skipLink}>
-                Step {step} of 3
+                Portal Step {step} of 3
             </p>
         </div>
     );
