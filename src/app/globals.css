@@ -33,6 +33,9 @@
   --shadow-md: 0 8px 24px -4px rgba(0,0,0,0.06), 0 4px 8px -2px rgba(0,0,0,0.04);
   --shadow-lg: 0 20px 48px -8px rgba(0,0,0,0.08), 0 8px 16px -4px rgba(0,0,0,0.04);
   
+  /* Motion Tokens */
+  --ease-vibrant: cubic-bezier(0.16, 1, 0.3, 1);
+  
   /* Typography - Modern & Friendly */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', sans-serif;

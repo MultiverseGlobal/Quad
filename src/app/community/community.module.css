@@ -160,12 +160,12 @@
     border-radius: var(--radius-xl);
     padding: 1.75rem;
     box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all var(--transition-normal);
 }
 
 .postCard:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
     border-color: var(--secondary-glow);
 }
 
@@ -181,6 +181,11 @@
     align-items: center;
     gap: 1rem;
     text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.authorInfo:hover {
+    opacity: 0.8;
 }
 
 .authorMeta {
@@ -239,15 +244,16 @@
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all var(--transition-normal);
     text-decoration: none;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.85rem;
     border-radius: var(--radius-full);
 }
 
 .interactionBtn:hover {
     color: var(--secondary);
     background: var(--secondary-glow);
+    transform: scale(1.05);
 }
 
 .shareBtn {
@@ -260,14 +266,15 @@
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
-    padding: 0.5rem 0.75rem;
+    transition: all var(--transition-normal);
+    padding: 0.5rem 0.85rem;
     border-radius: var(--radius-full);
 }
 
 .shareBtn:hover {
     color: var(--primary);
     background: var(--primary-glow);
+    transform: scale(1.05);
 }
 
 .emptyState {

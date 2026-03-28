@@ -23,7 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.variable}>
         <ToastProvider>
-          {children}
+          <main className="page-transition">
+            {children}
+          </main>
         </ToastProvider>
       </body>
     </html>

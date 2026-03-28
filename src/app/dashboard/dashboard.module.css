@@ -49,12 +49,12 @@
   border-radius: var(--radius-xl);
   padding: 2.25rem;
   box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
-  translate: 0 -2px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
 }
 
 .sectionTitle {
@@ -76,6 +76,7 @@
   background: var(--background);
   border-radius: var(--radius-lg);
   border: 1px solid var(--surface-border);
+  transition: all var(--transition-normal);
 }
 
 .pulseContent {
@@ -122,12 +123,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.2s;
+  transition: all var(--transition-fast);
 }
 
 .oppItem:hover {
   border-color: var(--secondary);
   background: var(--background);
+  transform: translateX(4px);
 }
 
 .oppInfo h4 {
