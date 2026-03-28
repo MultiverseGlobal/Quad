@@ -41,94 +41,97 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
     return (
         <>
             <Navbar />
-            <div className={styles.profile}>
-                <div className="container">
-                    <Link href="/network" className={styles.backLink} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--muted)', textDecoration: 'none', marginBottom: '1.5rem', fontWeight: 600, fontSize: '0.9rem' }}>
-                        <ArrowLeft size={16} />
-                        Back to Network
-                    </Link>
+      <div className={styles.profile}>
+        <div className="container">
+          <Link href="/network" className={`${styles.backLink} page-transition`}>
+            <ArrowLeft size={18} />
+            Back to Network
+          </Link>
 
-                    <div className={styles.profileWrapper}>
-                        <aside className={styles.sidebar}>
-                            <div className={styles.profileCard}>
-                                <Avatar 
-                                    name={profile.full_name} 
-                                    size="xl" 
-                                    style={{ margin: '0 auto 1.5rem' }}
-                                />
-                                <h1 className={styles.name}>{profile.full_name}</h1>
-                                <p className={styles.deptInfo}>{profile.department || 'Veritas Scholar'}</p>
-                                <p className={styles.bio}>
-                                    {profile.bio || 'Professional student active on Quad. Connect with me for collaborations!'}
-                                </p>
-                                
-                                <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
-                                    <Button style={{ flex: 1 }}>
-                                        <UserPlus size={16} />
-                                        Connect
-                                    </Button>
-                                    <Button variant="outline" style={{ flex: 1 }}>
-                                        <MessageSquare size={16} />
-                                        Message
-                                    </Button>
-                                </div>
-                            </div>
-                        </aside>
-
-                        <main className={styles.mainSection}>
-                            <div className={styles.contentCard}>
-                                <h2 className={styles.cardTitle}>
-                                    <GraduationCap size={18} />
-                                    Academic Spotlight
-                                </h2>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-                                    <div>
-                                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 800, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Current Standing</label>
-                                        <p style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '1rem' }}>{profile.level || '100L'} Scholar</p>
-                                    </div>
-                                    <div>
-                                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 800, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>University Email</label>
-                                        <p style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '1rem' }}>{profile.email || 'Protected'}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.contentCard}>
-                                <h2 className={styles.cardTitle}>
-                                    <Sparkles size={18} />
-                                    Social Loops
-                                </h2>
-                                <div style={{ display: 'grid', gap: '0.75rem' }}>
-                                    {profile.website && (
-                                        <a href={profile.website} target="_blank" rel="noopener noreferrer" className={styles.linkItem}>
-                                            <LinkIcon size={18} />
-                                            <div className={styles.linkInfo}>
-                                                <h4>Professional Portfolio</h4>
-                                                <p>{profile.website}</p>
-                                            </div>
-                                            <ExternalLink size={14} style={{ marginLeft: 'auto', opacity: 0.5 }} />
-                                        </a>
-                                    )}
-                                    <div className={styles.linkItem}>
-                                        <Instagram size={18} />
-                                        <div className={styles.linkInfo}>
-                                            <h4>Instagram</h4>
-                                            <p>@scholar_quad</p>
-                                        </div>
-                                    </div>
-                                    <div className={styles.linkItem}>
-                                        <Twitter size={18} />
-                                        <div className={styles.linkInfo}>
-                                            <h4>Twitter / X</h4>
-                                            <p>@veritas_student</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </main>
-                    </div>
+          <div className={styles.profileWrapper}>
+            <aside className={styles.sidebar}>
+              <div className={styles.profileCard}>
+                <Avatar 
+                  name={profile.full_name} 
+                  size="xl" 
+                />
+                <h1 className={styles.name}>{profile.full_name}</h1>
+                <p className={styles.deptInfo}>{profile.department || 'Veritas Scholar'}</p>
+                <p className={styles.bio}>
+                  {profile.bio || 'Building my future on Quad. Connect with me for collaborations!'}
+                </p>
+                
+                <div className={styles.buttonGroup}>
+                  <Button style={{ flex: 1 }} variant="primary" size="large">
+                    <UserPlus size={18} fill="currentColor" />
+                    Connect
+                  </Button>
+                  <Button variant="outline" style={{ flex: 1 }} size="large">
+                    <MessageSquare size={18} />
+                    Brief
+                  </Button>
                 </div>
-            </div>
+              </div>
+            </aside>
+
+            <main className={styles.mainSection}>
+              <div className={styles.contentCard}>
+                <h2 className={styles.cardTitle}>
+                  <GraduationCap size={20} />
+                  Academic Profile
+                </h2>
+                <div className={styles.snapGrid}>
+                  <div className={styles.statTile}>
+                    <h4 className={styles.statLabel}>Standing</h4>
+                    <span className={styles.statValue}>{profile.level || '100L'}</span>
+                  </div>
+                  <div className={styles.statTile}>
+                    <h4 className={styles.statLabel}>Email</h4>
+                    <span className={styles.matricValue}>{profile.email || 'Verified'}</span>
+                  </div>
+                  <div className={styles.statTile}>
+                    <h4 className={styles.statLabel}>University</h4>
+                    <span className={styles.matricValue}>Veritas Uni</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.contentCard}>
+                <h2 className={styles.cardTitle}>
+                  <Sparkles size={20} />
+                  Social Loops
+                </h2>
+                <div className={styles.linkList}>
+                  {profile.loops_shop_url && (
+                    <Link href={profile.loops_shop_url} className={styles.linkItem}>
+                      <ShoppingBag size={22} />
+                      <div className={styles.linkInfo}>
+                        <h4>Marketplace</h4>
+                        <p>Browse Scholar Shop</p>
+                      </div>
+                      <ExternalLink size={16} style={{ marginLeft: 'auto', opacity: 0.5 }} />
+                    </Link>
+                  )}
+                  <div className={styles.linkItem}>
+                    <Instagram size={22} />
+                    <div className={styles.linkInfo}>
+                      <h4>Instagram</h4>
+                      <p>@scholar_pulse</p>
+                    </div>
+                  </div>
+                  <div className={styles.linkItem}>
+                    <Twitter size={22} />
+                    <div className={styles.linkInfo}>
+                      <h4>Twitter / X</h4>
+                      <p>@veritas_quad</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
         </>
     );
 }

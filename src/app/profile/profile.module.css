@@ -5,9 +5,26 @@
 }
 
 .profileWrapper {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 2.5rem;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2.5rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  transition: all var(--transition-fast);
+}
+
+.backLink:hover {
+  color: var(--primary);
+  transform: translateX(-4px);
 }
 
 .sidebar {
