@@ -24,73 +24,79 @@ export default async function ProfilePage() {
     return (
         <>
             <Navbar />
-            <div className={styles.profile}>
-                <div className="container">
-                    <div className={styles.profileWrapper}>
-                        <aside className={styles.sidebar}>
-                            <div className={styles.profileCard}>
-                                <Avatar 
-                                    name={profile?.full_name} 
-                                    size="xl" 
-                                    style={{ margin: '0 auto 1.5rem' }}
-                                />
-                                <h1 className={styles.name}>{profile?.full_name || 'Scholar'}</h1>
-                                <p className={styles.deptInfo}>{profile?.department || 'Nigerian Student'}</p>
-                                <p className={styles.bio}>
-                                    {profile?.bio || 'Proud student of Veritas University. Connect with me for collaborations and study groups!'}
-                                </p>
-                                <Link href="/profile/edit" style={{ width: '100%', textDecoration: 'none' }}>
-                                    <Button variant="outline" style={{ width: '100%' }}>Edit Professional Profile</Button>
-                                </Link>
-                            </div>
-                        </aside>
+      <div className={styles.profile}>
+        <div className="container">
+          <div className={styles.profileWrapper}>
+            <aside className={styles.sidebar}>
+              <div className={styles.profileCard}>
+                <Avatar 
+                  name={profile?.full_name} 
+                  size="xl" 
+                />
+                <h1 className={styles.name}>{profile?.full_name || 'Verified Scholar'}</h1>
+                <p className={styles.deptInfo}>{profile?.department || 'Nigerian Student'}</p>
+                <p className={styles.bio}>
+                  {profile?.bio || 'Proud student of Veritas University. Building my pulse on campus!'}
+                </p>
+                <Link href="/profile/edit" style={{ width: '100%', textDecoration: 'none' }}>
+                  <Button variant="primary" size="large" style={{ width: '100%' }}>
+                    <Sparkles size={18} fill="currentColor" />
+                    Edit Pulse
+                  </Button>
+                </Link>
+              </div>
+            </aside>
 
-                        <main className={styles.mainSection}>
-                            <div className={styles.contentCard}>
-                                <h2 className={styles.cardTitle}>
-                                    <LinkIcon size={18} />
-                                    Digital Hub
-                                </h2>
-                                <div style={{ display: 'grid', gap: '0.75rem' }}>
-                                    <div className={styles.linkItem}>
-                                        <ShoppingBag size={18} />
-                                        <div className={styles.linkInfo}>
-                                            <h4>Entrepreneurial Store</h4>
-                                            <p>{profile?.loops_shop_url ? 'Verified Loops Link' : 'No Loops store connected yet'}</p>
-                                        </div>
-                                        <ExternalLink size={14} style={{ marginLeft: 'auto', opacity: 0.5 }} />
-                                    </div>
-                                    
-                                    <div className={styles.linkItem}>
-                                        <Mail size={18} />
-                                        <div className={styles.linkInfo}>
-                                            <h4>Institutional Email</h4>
-                                            <p>{user.email}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.contentCard}>
-                                <h2 className={styles.cardTitle}>
-                                    <GraduationCap size={18} />
-                                    Academic Snapshot
-                                </h2>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
-                                    <div style={{ padding: '1.25rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)', textAlign: 'center' }}>
-                                        <h4 style={{ fontWeight: 800, color: 'var(--muted)', marginBottom: '0.5rem', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current Level</h4>
-                                        <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--secondary)' }}>{profile?.level || '100L'}</span>
-                                    </div>
-                                    <div style={{ padding: '1.25rem', background: 'var(--surface-muted)', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)', textAlign: 'center' }}>
-                                        <h4 style={{ fontWeight: 800, color: 'var(--muted)', marginBottom: '0.5rem', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Matriculation</h4>
-                                        <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary)' }}>{profile?.matric_number || 'Pending'}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </main>
+            <main className={styles.mainSection}>
+              <div className={styles.contentCard}>
+                <h2 className={styles.cardTitle}>
+                  <LinkIcon size={20} />
+                  Digital Pulse
+                </h2>
+                <div className={styles.linkList}>
+                  <Link href={profile?.loops_shop_url || '#'} className={styles.linkItem}>
+                    <ShoppingBag size={22} />
+                    <div className={styles.linkInfo}>
+                      <h4>Campus Shop</h4>
+                      <p>{profile?.loops_shop_url ? 'Browse My Marketplace' : 'No shop linked yet'}</p>
                     </div>
+                    <ExternalLink size={16} style={{ marginLeft: 'auto', opacity: 0.5 }} />
+                  </Link>
+                  
+                  <div className={styles.linkItem}>
+                    <Mail size={22} />
+                    <div className={styles.linkInfo}>
+                      <h4>Institutional Contact</h4>
+                      <p>{user.email}</p>
+                    </div>
+                  </div>
                 </div>
-            </div>
+              </div>
+
+              <div className={styles.contentCard}>
+                <h2 className={styles.cardTitle}>
+                  <GraduationCap size={20} />
+                  Academic Snapshot
+                </h2>
+                <div className={styles.snapGrid}>
+                  <div className={styles.statTile}>
+                    <h4 className={styles.statLabel}>Current Year</h4>
+                    <span className={styles.statValue}>{profile?.level || '100L'}</span>
+                  </div>
+                  <div className={styles.statTile}>
+                    <h4 className={styles.statLabel}>Matric Number</h4>
+                    <span className={styles.matricValue}>{profile?.matric_number || 'Pending'}</span>
+                  </div>
+                  <div className={styles.statTile}>
+                    <h4 className={styles.statLabel}>Squad Status</h4>
+                    <span className={styles.matricValue}>Verified ✅</span>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
         </>
     );
 }

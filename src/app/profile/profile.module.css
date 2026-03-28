@@ -1,135 +1,175 @@
 .profile {
-  padding: 3rem 0 5rem;
+  padding: 7rem 0 5rem;
   min-height: 100vh;
+  background: var(--background);
 }
 
 .profileWrapper {
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 340px 1fr;
+    gap: 2.5rem;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 2rem;
 }
 
 .profileCard {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
+    background: #fff;
+    border-radius: var(--radius-xl);
     border: 1px solid var(--surface-border);
-    padding: 2rem 1.5rem;
+    padding: 3rem 2rem;
     text-align: center;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-normal);
 }
 
-.avatarLarge {
-    width: 7rem;
-    height: 7rem;
-    border-radius: 50%;
-    margin: 0 auto 1.5rem;
-    border: 4px solid var(--surface);
-    box-shadow: var(--shadow-md);
+.profileCard:hover {
+    transform: translateY(-4px);
 }
 
 .name {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin-bottom: 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
 }
 
 .deptInfo {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--secondary);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
-    margin-bottom: 1.25rem;
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
 }
 
 .bio {
     color: var(--muted);
     line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .mainSection {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
 }
 
 .contentCard {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
+    background: #fff;
+    border-radius: var(--radius-xl);
     border: 1px solid var(--surface-border);
-    padding: 2rem;
+    padding: 2.5rem;
     box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.contentCard:hover {
+    box-shadow: var(--shadow-md);
 }
 
 .cardTitle {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
+    font-family: var(--font-display);
 }
+
+.cardTitle svg { color: var(--secondary); }
 
 .linkItem {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: var(--surface-muted);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--surface-border);
-    margin-bottom: 0.75rem;
-    transition: all 0.2s;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--background);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--surface-border);
+    margin-bottom: 1rem;
+    transition: all var(--transition-normal);
     text-decoration: none;
+    color: var(--primary);
 }
 
 .linkItem:hover {
-    border-color: var(--primary);
+    border-color: var(--secondary);
     background: #fff;
-    transform: translateX(3px);
+    transform: translateX(6px);
+    box-shadow: var(--shadow-sm);
 }
 
 .linkInfo h4 {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--primary);
-    font-size: 0.95rem;
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
 }
 
 .linkInfo p {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--muted);
+    font-weight: 600;
 }
 
-.searchInput {
-    width: 100%;
-    border-radius: var(--radius-md);
-    background: var(--surface-muted);
-    border: 1px solid var(--surface-border);
-    color: var(--foreground);
-    transition: all 0.2s;
-    font-size: 0.9rem;
-    font-weight: 500;
+.snapGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
 }
 
-.searchInput:focus {
-    outline: none;
-    border-color: var(--primary);
+.statTile {
+    padding: 1.75rem;
+    background: var(--background);
+    border-radius: var(--radius-xl);
+    border: 1.5px solid var(--surface-border);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.statTile:hover {
+    border-color: var(--secondary);
     background: #fff;
-    box-shadow: 0 0 0 3px var(--border-focus);
+    box-shadow: var(--shadow-sm);
+}
+
+.statLabel {
+    font-weight: 800;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.statValue {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--secondary);
+    font-family: var(--font-display);
+}
+
+.matricValue {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
 }
 
 @media (max-width: 1024px) {
     .profileWrapper {
         grid-template-columns: 1fr;
+    }
+    .profile {
+        padding: 6rem 1.5rem 3rem;
     }
 }
