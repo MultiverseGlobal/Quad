@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Navbar } from '@/components/layout/Navbar';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { updateProfile } from '../actions';
 import styles from '../profile.module.css';
