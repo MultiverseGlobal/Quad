@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import styles from '../opportunities.module.css';
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
+import { Avatar } from '@/components/ui/Avatar';
 import { 
     Briefcase, 
     MapPin, 
