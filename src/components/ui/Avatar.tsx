@@ -9,6 +9,7 @@ interface AvatarProps {
   size?: 'small' | 'medium' | 'large' | 'xl';
   verified?: boolean;
   status?: 'online' | 'academic' | 'none';
+  src?: string | null;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -19,6 +20,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   size = 'medium', 
   verified = true,
   status = 'none',
+  src,
   className,
   style 
 }) => {
@@ -31,7 +33,11 @@ export const Avatar: React.FC<AvatarProps> = ({
       title={`${name}${department ? ` - ${department}` : ''}`}
     >
       <div className={styles.avatar}>
-        {initial}
+        {src ? (
+          <img src={src} alt={name} className={styles.image} />
+        ) : (
+          initial
+        )}
         {status === 'academic' && (
           <div className={styles.academicBadge}>
             <Sparkles size={8} />
