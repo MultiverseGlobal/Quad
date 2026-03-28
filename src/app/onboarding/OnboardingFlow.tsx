@@ -57,10 +57,10 @@ export default function OnboardingFlow() {
           <div className={`${styles.step} ${step >= 3 ? styles.active : ''}`}>3</div>
         </div>
         <h1 className={styles.headerTitle}>
-          {step === 1 ? "Customize Your Pulse" : step === 2 ? "Academic Journey" : "Verified Networks"}
+          {step === 1 ? "Your Intro" : step === 2 ? "Academic Journey" : "Verified Networks"}
         </h1>
         <p className={styles.headerSub}>
-          {step === 1 ? "Initialize your professional research and social feed." : 
+          {step === 1 ? "Set up your profile and join the campus feed." : 
            step === 2 ? "Define your path through the university ecosystem." : 
            "Connect with high-impact departmental communities."}
         </p>
@@ -79,7 +79,7 @@ export default function OnboardingFlow() {
             <>
               <div className={styles.iconCircle}><Sparkles size={32} fill="currentColor" /></div>
               <h3 className={styles.stepTitle}>Research Interests</h3>
-              <p className={styles.stepDesc}>Pulse picks: Choose 3 topics to fuel your engine.</p>
+              <p className={styles.stepDesc}>Feed picks: Choose 3 topics to fuel your engine.</p>
               <div className={styles.interestGrid}>
                 {INTERESTS.map((item) => (
                   <button 
@@ -98,7 +98,7 @@ export default function OnboardingFlow() {
             <>
               <div className={styles.iconCircle}><GraduationCap size={32} /></div>
               <h3 className={styles.stepTitle}>Graduation Class</h3>
-              <p className={styles.stepDesc}>This helps us unlock exclusive career briefs for you.</p>
+              <p className={styles.stepDesc}>This helps us unlock exclusive career plays for you.</p>
               <div className={styles.yearGrid}>
                 {['2024', '2025', '2026', '2027', '2028', 'Later'].map(y => (
                   <button 
@@ -145,7 +145,7 @@ export default function OnboardingFlow() {
             size="large"
             disabled={(step === 1 && selectedInterests.length < 3) || isPending}
           >
-            {isPending ? "Syncing Workspace..." : step === 3 ? "Launch My Pulse" : "Lock It In"}
+            {isPending ? "Syncing Workspace..." : step === 3 ? "Launch My Page" : "Lock It In"}
           </Button>
         </div>
       </div>

@@ -37,13 +37,13 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
           <header className={styles.header}>
             <div className={styles.headerTop}>
               <div className={styles.headerInfo}>
-                <h1 className={styles.headerTitle}>Launchpad</h1>
-                <p className={styles.headerSub}>Find exclusive campus gigs and high-impact internships.</p>
+                <h1 className={styles.headerTitle}>Plays</h1>
+                <p className={styles.headerSub}>Find and share high-impact campus plays and career moves.</p>
               </div>
               <Link href="/opportunities/new">
                 <Button variant="primary" size="large">
                   <Briefcase size={20} fill="currentColor" />
-                  Post an Opening
+                  Post a Play
                 </Button>
               </Link>
             </div>
@@ -56,7 +56,7 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                   type="text" 
                   defaultValue={query} 
                   className={styles.searchInput} 
-                  placeholder="Search by role, company, or skill..." 
+                  placeholder="Search for plays and companies..." 
                 />
                 {typeFilter !== 'All' && <input type="hidden" name="type" value={typeFilter} />}
               </form>
@@ -68,7 +68,7 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                     href={`/opportunities?type=${cat}${query ? `&query=${encodeURIComponent(query)}` : ''}`}
                     className={`${styles.tab} ${typeFilter === cat ? styles.activeTab : ''}`}
                   >
-                    {cat}
+                    {cat === 'Gig' ? 'Play' : cat}
                   </Link>
                 ))}
               </div>
@@ -87,7 +87,7 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
                   
                   <div className={styles.tags}>
                     <div className={`${styles.tag} ${styles[job.type?.toLowerCase() || 'gig']}`}>
-                      {job.type || 'Gig'}
+                      {job.type === 'Gig' ? 'Play' : (job.type || 'Play')}
                     </div>
                     <div className={styles.tag}><MapPin size={14} /> {job.location || 'Remote'}</div>
                     <div className={styles.tag}><DollarSign size={14} /> {job.salary || 'Varies'}</div>
@@ -95,7 +95,7 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
 
                   <div className={styles.cardFooter}>
                     <Link href={`/opportunities/${job.id}`} style={{ textDecoration: 'none' }}>
-                      <Button variant="outline" size="small" style={{ width: '100%' }}>View Brief</Button>
+                      <Button variant="outline" size="small" style={{ width: '100%' }}>View Play</Button>
                     </Link>
                   </div>
                 </article>
@@ -103,7 +103,7 @@ export default async function OpportunitiesPage({ searchParams }: { searchParams
             ) : (
               <div className={styles.emptyState}>
                 <Briefcase size={48} strokeWidth={1} />
-                <p>No opportunities found matching your search.</p>
+                <p>No plays found matching your search.</p>
               </div>
             )}
           </div>

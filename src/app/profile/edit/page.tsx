@@ -30,10 +30,10 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
           <div className={`${styles.contentCard} page-transition`}>
             <h1 className={styles.cardTitle}>
               <Sparkles size={24} />
-              Personalize Your Pulse
+              Refine Your Intro
             </h1>
             <p className={styles.bio} style={{ marginBottom: '2.5rem' }}>
-              Refine your identity on the Veritas Scholar Network. Let the campus know who you are.
+              Update your identity on the scholar network. Let the squad know who you are.
             </p>
 
             {params?.error && (
@@ -54,11 +54,11 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
               </div>
 
               <div className={styles.formGroup}>
-                <label className={styles.label}>Your Story (Bio)</label>
+                <label className={styles.label}>Your Intro (Story)</label>
                 <textarea 
                   name="bio" 
                   defaultValue={profile?.bio} 
-                  placeholder="Tell the campus about your goals, vibes, and interests..." 
+                  placeholder="Tell the squad about your goals, vibes, and interests..." 
                   rows={4}
                   className={styles.searchInput}
                   style={{ borderRadius: 'var(--radius-xl)', resize: 'none' }}
@@ -82,7 +82,7 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
                   </select>
                 </div>
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Loops Shop</label>
+                  <label className={styles.label}>Marketplace URL</label>
                   <input 
                     name="loops_shop_url" 
                     defaultValue={profile?.loops_shop_url} 
@@ -93,7 +93,7 @@ export default async function EditProfilePage({ searchParams }: { searchParams: 
               </div>
 
               <div className={styles.buttonGroup}>
-                <Button type="submit" style={{ flex: 1 }} size="large">Save Pulse</Button>
+                <Button type="submit" style={{ flex: 1 }} size="large">Lock It In</Button>
                 <Link href="/profile" style={{ flex: 1, textDecoration: 'none' }}>
                   <Button variant="ghost" type="button" style={{ width: '100%' }} size="large">Cancel</Button>
                 </Link>

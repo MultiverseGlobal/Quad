@@ -64,7 +64,7 @@ export default async function DashboardPage() {
                                     Hey, {profile?.full_name?.split(' ')[0] || 'Scholar'}!
                                 </h1>
                                 <p className={styles.welcomeSub}>
-                                    Your campus pulse is strong today • {profile?.department}
+                                    The word on campus is spreading today • {profile?.department}
                                 </p>
                             </div>
                         </div>
@@ -80,7 +80,7 @@ export default async function DashboardPage() {
                             <section className={styles.card}>
                                 <h2 className={styles.sectionTitle}>
                                     <TrendingUp size={20} className={styles.accentIcon} />
-                                    What's Happening
+                                    What's the Word?
                                 </h2>
                                 <div className={styles.feedPulse}>
                                     {recentPost.data ? (
@@ -88,15 +88,15 @@ export default async function DashboardPage() {
                                             <p className={styles.pulseQuote}>"{recentPost.data.content}"</p>
                                             <div className={styles.pulseMeta}>
                                                 <Avatar name="Scholar" size="small" />
-                                                <span>Just shared in your department</span>
+                                                <span>Live from the Feed</span>
                                             </div>
                                         </div>
                                     ) : (
                                         <div className={styles.emptyPulse}>
-                                            <MessageSquare size={32} />
-                                            <p>Quiet on campus today.</p>
+                                            <MessageCircle size={32} />
+                                            <p>No new word on the feed.</p>
                                             <Link href="/community">
-                                                <Button variant="outline" size="small">Say Hello</Button>
+                                                <Button variant="outline" size="small">Start a Conversation</Button>
                                             </Link>
                                         </div>
                                     )}
@@ -106,7 +106,7 @@ export default async function DashboardPage() {
                             <section className={styles.card}>
                                 <h2 className={styles.sectionTitle}>
                                     <Briefcase size={20} className={styles.secondaryIcon} />
-                                    Upcoming Gigs
+                                    Plays for You
                                 </h2>
                                 <div className={styles.oppList}>
                                     {recentOpportunities.data && recentOpportunities.data.length > 0 ? (
@@ -117,12 +117,12 @@ export default async function DashboardPage() {
                                                     <p>{job.company}</p>
                                                 </div>
                                                 <Link href={`/opportunities`}>
-                                                    <Button variant="ghost" size="small">View Detail</Button>
+                                                    <Button variant="ghost" size="small">View Play</Button>
                                                 </Link>
                                             </div>
                                         ))
                                     ) : (
-                                        <p className={styles.emptyText}>No new opportunities right now.</p>
+                                        <p className={styles.emptyText}>No new plays at the moment.</p>
                                     )}
                                 </div>
                             </section>
@@ -136,7 +136,7 @@ export default async function DashboardPage() {
                                 </div>
                                 <div className={styles.statTile}>
                                     <span className={styles.statNum}>12</span>
-                                    <span className={styles.statLabel}>Active Gigs</span>
+                                    <span className={styles.statLabel}>Scholar Edge</span>
                                 </div>
                             </div>
 
@@ -145,7 +145,7 @@ export default async function DashboardPage() {
                                 <nav className={styles.linkList}>
                                     <Link href="/profile" className={styles.linkItem}>
                                         <User size={16} />
-                                        Your Scholar Profile
+                                        Your Page
                                     </Link>
                                     <Link href="/network" className={styles.linkItem}>
                                         <Sparkles size={16} />

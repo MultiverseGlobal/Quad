@@ -36,12 +36,12 @@ export default async function ProfilePage() {
                 <h1 className={styles.name}>{profile?.full_name || 'Verified Scholar'}</h1>
                 <p className={styles.deptInfo}>{profile?.department || 'Nigerian Student'}</p>
                 <p className={styles.bio}>
-                  {profile?.bio || 'Proud student of Veritas University. Building my pulse on campus!'}
+                  {profile?.bio || 'Proud student of Veritas University. Building my intro on the squad!'}
                 </p>
                 <Link href="/profile/edit" style={{ width: '100%', textDecoration: 'none' }}>
                   <Button variant="primary" size="large" style={{ width: '100%' }}>
                     <Sparkles size={18} fill="currentColor" />
-                    Edit Pulse
+                    Refine Intro
                   </Button>
                 </Link>
               </div>
@@ -51,7 +51,7 @@ export default async function ProfilePage() {
               <div className={styles.contentCard}>
                 <h2 className={styles.cardTitle}>
                   <LinkIcon size={20} />
-                  Digital Pulse
+                  My Links
                 </h2>
                 <div className={styles.linkList}>
                   <Link href={profile?.loops_shop_url || '#'} className={styles.linkItem}>

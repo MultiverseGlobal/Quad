@@ -21,9 +21,10 @@ export async function Navbar() {
                 <div className={styles.navLinks}>
                     <NavLink href="/community">Feed</NavLink>
                     <NavLink href="/network">Network</NavLink>
-                    <NavLink href="/opportunities">Opportunities</NavLink>
+                    <NavLink href="/scholarships">Scholarships</NavLink>
+                    <NavLink href="/opportunities">Plays</NavLink>
                     <div style={{ position: 'relative' }}>
-                        <NavLink href="/messages">Briefs</NavLink>
+                        <NavLink href="/messages">Pings</NavLink>
                         {user && (
                             <UnreadDot userId={user.id} />
                         )}
@@ -36,7 +37,7 @@ export async function Navbar() {
                             <Link href="/profile">
                                 <Button variant="ghost">
                                     <UserIcon size={18} />
-                                    Profile
+                                    Your Page
                                 </Button>
                             </Link>
                             <form action={signOut}>

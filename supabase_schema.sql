@@ -73,15 +73,18 @@ create table public.connections (
   primary key (follower_id, following_id)
 );
 
--- Opportunities
-create table public.opportunities (
+-- Scholarships (Multi-University)
+create table public.scholarships (
   id uuid default uuid_generate_v4() primary key,
   title text not null,
-  company text not null,
-  description text not null,
-  type text not null, -- 'Internship', 'Job', 'Gig', 'Event'
+  provider text not null,
+  amount text, -- e.g., 'Full Tuition', '$5,000'
+  deadline date,
+  university text not null, -- Targeting (e.g., 'Oxford', 'Veritas')
+  scope text not null default 'International', -- 'Internal', 'National', 'International'
+  department_eligibility text[], -- Array of eligible departments
   link text,
-  author_id uuid references public.profiles(id) on delete set null,
+  description text,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
@@ -92,6 +95,7 @@ alter table public.posts enable row level security;
 alter table public.comments enable row level security;
 alter table public.connections enable row level security;
 alter table public.opportunities enable row level security;
+alter table public.scholarships enable row level security;
 
 -- Policies
 create policy "Public profiles are viewable by everyone." on public.profiles
@@ -109,3 +113,7 @@ create policy "Anyone can view posts." on public.posts
 
 create policy "Authenticated users can create posts." on public.posts
   for insert with check (auth.uid() = author_id);
+
+-- Scholarships policies
+create policy "Anyone can view scholarships." on public.scholarships
+  for select using (true);

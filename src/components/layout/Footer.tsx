@@ -27,15 +27,15 @@ export const Footer = () => {
           <div className={styles.links}>
             <div className={styles.column}>
               <h4>The Squad</h4>
-              <Link href="/community">Campus Pulse</Link>
+              <Link href="/community">The Word</Link>
               <Link href="/network">Peer Network</Link>
-              <Link href="/profile">Your Pulse</Link>
-              <Link href="/messages">Direct Briefs</Link>
+              <Link href="/profile">Your Page</Link>
+              <Link href="/messages">Pings</Link>
             </div>
             
             <div className={styles.column}>
               <h4>The Gig</h4>
-              <Link href="/opportunities">Launchpad</Link>
+              <Link href="/opportunities">Plays</Link>
               <Link href="/loops">Marketplace</Link>
               <Link href="#">Verified Skills</Link>
               <Link href="#">Analytics</Link>

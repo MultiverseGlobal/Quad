@@ -77,7 +77,7 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                                     <Link href="/profile" className={styles.categoryLink}>
                                         <User size={16} />
-                                        Your Profile
+                                        Your Page
                                     </Link>
                                     <Link href="/network" className={styles.categoryLink}>
                                         <Sparkles size={16} />
@@ -106,7 +106,7 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
                         <main className={styles.feedColumn}>
                             <header className={styles.header}>
                                 <div>
-                                    <h2 className={styles.headerTitle}>Community Pulse</h2>
+                                    <h2 className={styles.headerTitle}>The Feed</h2>
                                     <p className={styles.headerSub}>The institutional discussion stream for Veritas University.</p>
                                 </div>
                                 
@@ -116,7 +116,7 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
                                         <input 
                                             name="query" 
                                             type="text" 
-                                            placeholder="Search discussions..." 
+                                            placeholder="Search the feed..." 
                                             className={styles.searchInput}
                                             defaultValue={query}
                                         />
@@ -137,7 +137,7 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
                                 ) : (
                                     <div className={styles.emptyState}>
                                         <MessageCircle size={32} />
-                                        <p style={{ fontWeight: 600, marginTop: '1rem' }}>No discussions found in this stream.</p>
+                                        <p style={{ fontWeight: 600, marginTop: '1rem' }}>No posts found in this feed.</p>
                                     </div>
                                 )}
                             </div>
@@ -154,15 +154,15 @@ export default async function CommunityPage({ searchParams }: { searchParams: Pr
                             </div>
                             
                             <div className={styles.sidebarCard}>
-                                <h4 className={styles.widgetTitle}>Trending Gigs</h4>
+                                <h4 className={styles.widgetTitle}>Trending Plays</h4>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                     <div className={styles.trendingItem}>
                                         <div className={styles.trendingTitle}>Research Assistant</div>
-                                        <div className={styles.trendingMeta}>Economics • $25/hr</div>
+                                        <div className={styles.trendingMeta}>Economics • 200 Pulse</div>
                                     </div>
                                     <div className={styles.trendingItem}>
                                         <div className={styles.trendingTitle}>Visual Branding</div>
-                                        <div className={styles.trendingMeta}>Design • $50/gig</div>
+                                        <div className={styles.trendingMeta}>Design • 500 Pulse</div>
                                     </div>
                                 </div>
                             </div>
