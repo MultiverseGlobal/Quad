@@ -18,6 +18,9 @@ export default function OnboardingFlow() {
     const [year, setYear] = useState('2024');
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState<string | null>(null);
+    const [joinedGuild, setJoinedGuild] = useState(false);
+
+    const toggleJoinGuild = () => setJoinedGuild(!joinedGuild);
 
     const toggleInterest = (interest: string) => {
         setSelectedInterests(prev => 
@@ -131,7 +134,14 @@ export default function OnboardingFlow() {
                     <h4 className={styles.squadName}>Innovation Guild</h4>
                     <p className={styles.squadMeta}>Student Marketplace</p>
                   </div>
-                  <Button size="small">Join Now</Button>
+                  <Button 
+                    size="small" 
+                    variant={joinedGuild ? "ghost" : "primary"}
+                    className={joinedGuild ? styles.joinedBtn : ""}
+                    onClick={toggleJoinGuild}
+                  >
+                    {joinedGuild ? "Joined" : "Join Now"}
+                  </Button>
                 </div>
               </div>
             </>

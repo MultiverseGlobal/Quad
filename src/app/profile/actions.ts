@@ -32,6 +32,29 @@ export async function updateProfile(formData: FormData) {
         return redirect(`/profile/edit?error=${encodeURIComponent(error.message)}`);
     }
 
+    if (fullName && bio && level) {
+        const { data: history } = await supabase
+            .from('edge_history')
+            .select('id')
+            .eq('profile_id', user.id)
+            .eq('action', 'PROFILE_COMPLETION')
+            .single();
+            
+        if (!history) {
+            // First time completing profile
+            await supabase.rpc('increment_scholar_edge', { 
+                target_profile_id: user.id, 
+                points: 50 
+            });
+            
+            await supabase.from('edge_history').insert({
+                profile_id: user.id,
+                action: 'PROFILE_COMPLETION',
+                points_awarded: 50
+            });
+        }
+    }
+
     revalidatePath('/profile');
     revalidatePath('/dashboard');
     redirect('/profile');

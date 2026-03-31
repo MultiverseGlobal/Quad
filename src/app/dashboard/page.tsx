@@ -17,6 +17,8 @@ import {
     Sparkles
 } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
+import { EdgeBadge } from '@/components/ui/EdgeBadge';
+import { Trophy } from 'lucide-react';
 
 export default async function DashboardPage() {
     const supabase = await createClient();
@@ -44,12 +46,19 @@ export default async function DashboardPage() {
             .order('created_at', { ascending: false })
             .limit(1)
             .single(),
-        supabase
             .from('opportunities')
             .select('*')
             .order('created_at', { ascending: false })
-            .limit(2)
+            .limit(2),
+        supabase
+            .from('profiles')
+            .select('*')
+            .eq('department', profile?.department || '')
+            .order('scholar_edge', { ascending: false })
+            .limit(3)
     ]);
+
+    const topScholars = topScholarsData.data;
 
     return (
         <>
@@ -135,8 +144,38 @@ export default async function DashboardPage() {
                                     <span className={styles.statLabel}>Connections</span>
                                 </div>
                                 <div className={styles.statTile}>
-                                    <span className={styles.statNum}>12</span>
-                                    <span className={styles.statLabel}>Scholar Edge</span>
+                                    <span className={styles.statNum}>
+                                        <EdgeBadge score={profile?.scholar_edge || 0} />
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className={styles.card}>
+                                <h3 className={styles.widgetTitle}>
+                                    <Trophy size={16} style={{ color: '#f59e0b', marginRight: '0.4rem', verticalAlign: 'middle' }} />
+                                    Top Scholars
+                                </h3>
+                                <div className={styles.linkList} style={{ marginTop: '0.5rem' }}>
+                                    {topScholars && topScholars.length > 0 ? (
+                                        topScholars.map((scholar, idx) => (
+                                            <div key={scholar.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--muted)', width: '20px' }}>
+                                                    {idx + 1}
+                                                </span>
+                                                <Avatar name={scholar.full_name} size="small" />
+                                                <div style={{ flex: 1, minWidth: 0 }}>
+                                                    <h4 style={{ margin: 0, fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                        {scholar.full_name}
+                                                    </h4>
+                                                    <div style={{ transform: 'scale(0.85)', transformOrigin: 'left' }}>
+                                                        <EdgeBadge score={scholar.scholar_edge || 0} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>No scholars ranked yet.</p>
+                                    )}
                                 </div>
                             </div>
 

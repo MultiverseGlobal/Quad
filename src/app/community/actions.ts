@@ -25,6 +25,18 @@ export async function createPost(formData: FormData) {
         return redirect(`/community/new?error=${encodeURIComponent(error.message)}`);
     }
 
+    // Grant Scholar Edge (+10)
+    await supabase.rpc('increment_scholar_edge', { 
+        target_profile_id: user.id, 
+        points: 10 
+    });
+    
+    await supabase.from('edge_history').insert({
+        profile_id: user.id,
+        action: 'FEED_POST',
+        points_awarded: 10
+    });
+
     revalidatePath('/community');
     revalidatePath('/dashboard');
     redirect('/community');

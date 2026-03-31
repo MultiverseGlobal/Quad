@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
 export async function signup(formData: FormData) {
     const supabase = await createClient();
@@ -13,10 +14,14 @@ export async function signup(formData: FormData) {
     const department = formData.get('department') as string;
 
 
+    const headersList = await headers();
+    const origin = headersList.get('origin');
+
     const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
+            emailRedirectTo: `${origin}/auth/callback`,
             data: {
                 full_name: fullName,
                 matric_number: matricNumber,
@@ -49,7 +54,7 @@ export async function signup(formData: FormData) {
         }
     }
 
-    return redirect('/auth/verify-email');
+    return redirect(`/auth/verify-email?email=${encodeURIComponent(email)}`);
 }
 
 export async function login(formData: FormData) {
@@ -74,4 +79,25 @@ export async function signOut() {
     const supabase = await createClient();
     await supabase.auth.signOut();
     return redirect('/');
+}
+
+export async function resendMagicLink(formData: FormData) {
+    const supabase = await createClient();
+    const email = formData.get('email') as string;
+    const headersList = await headers();
+    const origin = headersList.get('origin');
+
+    const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: {
+            emailRedirectTo: `${origin}/auth/callback`,
+        },
+    });
+
+    if (error) {
+        return redirect(`/auth/verify-email?error=${encodeURIComponent(error.message)}`);
+    }
+
+    return redirect('/auth/verify-email?message=Verification link resent!');
 }

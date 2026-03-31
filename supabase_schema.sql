@@ -13,6 +13,7 @@ create table public.profiles (
   skills text[],
   projects jsonb[],
   loops_shop_url text,
+  scholar_edge int default 0, -- Scholar Edge (Merit Points)
   onboarding_completed boolean default false,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
@@ -117,3 +118,28 @@ create policy "Authenticated users can create posts." on public.posts
 -- Scholarships policies
 create policy "Anyone can view scholarships." on public.scholarships
   for select using (true);
+
+-- Scholar Edge History
+create table public.edge_history (
+  id uuid default uuid_generate_v4() primary key,
+  profile_id uuid references public.profiles(id) on delete cascade not null,
+  action text not null, -- e.g., 'PROFILE_COMPLETION', 'NEW_PLAY', 'FEED_POST'
+  points_awarded int not null,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.edge_history enable row level security;
+
+create policy "Users can view their own edge history." on public.edge_history
+  for select using (auth.uid() = profile_id);
+
+-- RPC for incrementing scholar edge safely
+create or replace function increment_scholar_edge(target_profile_id uuid, points int)
+returns void as $$
+begin
+  update public.profiles
+  set scholar_edge = scholar_edge + points
+  where id = target_profile_id;
+end;
+$$ language plpgsql security definer;
+

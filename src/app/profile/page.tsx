@@ -6,6 +6,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { User, Mail, GraduationCap, Link as LinkIcon, Instagram, Twitter, ExternalLink, ShoppingBag, Sparkles } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
+import { EdgeBadge } from '@/components/ui/EdgeBadge';
+import { History } from 'lucide-react';
 
 export default async function ProfilePage() {
     const supabase = await createClient();
@@ -21,6 +23,13 @@ export default async function ProfilePage() {
         .eq('id', user.id)
         .single();
 
+    const { data: edgeHistory } = await supabase
+        .from('edge_history')
+        .select('*')
+        .eq('profile_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(5);
+
     return (
         <>
             <Navbar />
@@ -33,7 +42,12 @@ export default async function ProfilePage() {
                   name={profile?.full_name} 
                   size="xl" 
                 />
-                <h1 className={styles.name}>{profile?.full_name || 'Verified Scholar'}</h1>
+                <h1 className={styles.name}>
+                  {profile?.full_name || 'Verified Scholar'}
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <EdgeBadge score={profile?.scholar_edge || 0} />
+                  </div>
+                </h1>
                 <p className={styles.deptInfo}>{profile?.department || 'Nigerian Student'}</p>
                 <p className={styles.bio}>
                   {profile?.bio || 'Proud student of Veritas University. Building my intro on the squad!'}
@@ -93,6 +107,26 @@ export default async function ProfilePage() {
                   </div>
                 </div>
               </div>
+
+              {edgeHistory && edgeHistory.length > 0 && (
+                <div className={styles.contentCard} style={{ marginTop: '2rem' }}>
+                  <h2 className={styles.cardTitle}>
+                    <History size={20} />
+                    Edge Ledger
+                  </h2>
+                  <div className={styles.linkList}>
+                    {edgeHistory.map((log: any) => (
+                      <div key={log.id} className={styles.linkItem} style={{ cursor: 'default' }}>
+                        <div className={styles.linkInfo}>
+                          <h4>{log.action.replace(/_/g, ' ')}</h4>
+                          <p>{new Date(log.created_at).toLocaleDateString()}</p>
+                        </div>
+                        <strong style={{ color: 'var(--primary)' }}>+{log.points_awarded}</strong>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </main>
           </div>
         </div>

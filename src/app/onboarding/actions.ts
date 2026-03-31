@@ -17,6 +17,7 @@ export async function completeOnboarding(formData: FormData) {
         .from('profiles')
         .update({
             skills: JSON.parse(interests),
+            scholar_edge: 50, // Welcome bonus/onboarding completion Reward
             onboarding_completed: true,
             updated_at: new Date().toISOString()
         })
