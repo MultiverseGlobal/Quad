@@ -1,3 +1,4 @@
+'use client';
 import { Sparkles, Star, Zap } from 'lucide-react';
 
 interface EdgeBadgeProps {

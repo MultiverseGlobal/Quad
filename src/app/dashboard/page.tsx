@@ -39,13 +39,14 @@ export default async function DashboardPage() {
     }
 
     // Fetch dynamic content for dashboard
-    const [recentPost, recentOpportunities] = await Promise.all([
+    const [recentPostData, recentOpportunitiesData, topScholarsData] = await Promise.all([
         supabase
             .from('posts')
             .select('*')
             .order('created_at', { ascending: false })
             .limit(1)
             .single(),
+        supabase
             .from('opportunities')
             .select('*')
             .order('created_at', { ascending: false })
@@ -58,6 +59,8 @@ export default async function DashboardPage() {
             .limit(3)
     ]);
 
+    const recentPost = recentPostData;
+    const recentOpportunities = recentOpportunitiesData;
     const topScholars = topScholarsData.data;
 
     return (
@@ -102,7 +105,7 @@ export default async function DashboardPage() {
                                         </div>
                                     ) : (
                                         <div className={styles.emptyPulse}>
-                                            <MessageCircle size={32} />
+                                            <MessageSquare size={32} />
                                             <p>No new word on the feed.</p>
                                             <Link href="/community">
                                                 <Button variant="outline" size="small">Start a Conversation</Button>
