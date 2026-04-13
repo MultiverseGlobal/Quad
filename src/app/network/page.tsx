@@ -7,6 +7,7 @@ import { toggleFollow, acceptConnectionRequest } from './actions';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Avatar } from '@/components/ui/Avatar';
+import { EdgeBadge } from '@/components/ui/EdgeBadge';
 
 export default async function NetworkPage({ searchParams }: { searchParams: Promise<{ query?: string }> }) {
     const params = await searchParams;
@@ -126,6 +127,9 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                                                 size="large" 
                                             />
                                             <h3 className={styles.name}>{p.full_name}</h3>
+                                            <div style={{ transform: 'scale(0.85)', transformOrigin: 'top', marginBottom: '0.4rem' }}>
+                                                <EdgeBadge score={p.scholar_edge || 0} />
+                                            </div>
                                             <p className={styles.dept}>{p.department}</p>
                                             
                                             <div className={styles.meta}>

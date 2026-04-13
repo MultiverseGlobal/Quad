@@ -17,6 +17,7 @@ import {
     ShoppingBag
 } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
+import { EdgeBadge } from '@/components/ui/EdgeBadge';
 import Link from 'next/link';
 
 export default async function PublicProfilePage({ params }: { params: Promise<{ id: string }> }) {
@@ -56,7 +57,12 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
                   name={profile.full_name} 
                   size="xl" 
                 />
-                <h1 className={styles.name}>{profile.full_name}</h1>
+                <h1 className={styles.name}>
+                  {profile.full_name}
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <EdgeBadge score={profile.scholar_edge || 0} />
+                  </div>
+                </h1>
                 <p className={styles.deptInfo}>{profile.department || 'Veritas Scholar'}</p>
                 <p className={styles.bio}>
                   {profile.bio || 'Building my future on Quad. Connect with me for collaborations!'}
@@ -69,7 +75,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
                   </Button>
                   <Button variant="outline" style={{ flex: 1 }} size="large">
                     <MessageSquare size={18} />
-                    Brief
+                    Ping
                   </Button>
                 </div>
               </div>
