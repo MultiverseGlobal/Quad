@@ -39,7 +39,7 @@ export default async function DashboardPage() {
     }
 
     // Fetch dynamic content for dashboard
-    const [recentPostData, recentOpportunitiesData, topScholarsData] = await Promise.all([
+    const [recentPost, recentOpportunities, topScholarsData] = await Promise.all([
         supabase
             .from('posts')
             .select('*')
@@ -59,8 +59,6 @@ export default async function DashboardPage() {
             .limit(3)
     ]);
 
-    const recentPost = recentPostData;
-    const recentOpportunities = recentOpportunitiesData;
     const topScholars = topScholarsData.data;
 
     return (

@@ -139,7 +139,7 @@ export default async function NetworkPage({ searchParams }: { searchParams: Prom
                                         <div className={styles.actions}>
                                             <form action={toggleFollow.bind(null, p.id, !!status)}>
                                                 <Button 
-                                                    variant={status === 'accepted' ? "outline" : status === 'pending' ? "ghost" : "primary"} 
+                                                    variant={status === 'accepted' ? "outline" : status === 'pending' ? "subtle" : "primary"} 
                                                     size="small"
                                                     style={{ width: '100%' }}
                                                     disabled={status === 'pending'}

@@ -75,18 +75,30 @@ create table public.connections (
 );
 
 -- Scholarships (Multi-University)
-create table public.scholarships (
-  id uuid default uuid_generate_v4() primary key,
-  title text not null,
-  provider text not null,
+CREATE TABLE public.scholarships (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  title text NOT NULL,
+  provider text NOT NULL,
   amount text, -- e.g., 'Full Tuition', '$5,000'
   deadline date,
-  university text not null, -- Targeting (e.g., 'Oxford', 'Veritas')
-  scope text not null default 'International', -- 'Internal', 'National', 'International'
+  university text NOT NULL, -- Targeting (e.g., 'Oxford', 'Veritas')
+  scope text NOT NULL DEFAULT 'International', -- 'Internal', 'National', 'International'
   department_eligibility text[], -- Array of eligible departments
   link text,
   description text,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Opportunities (Marketplace Plays)
+CREATE TABLE public.opportunities (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  author_id uuid REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  title text NOT NULL,
+  company text NOT NULL,
+  type text, -- e.g., 'Internship', 'Full-time'
+  description text,
+  link text,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 -- Row Level Security (RLS)

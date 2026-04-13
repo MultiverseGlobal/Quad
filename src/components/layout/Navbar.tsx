@@ -20,7 +20,10 @@ export async function Navbar() {
 
                 <div className={styles.navLinks}>
                     <NavLink href="/community">Feed</NavLink>
-                    <NavLink href="/network">Network</NavLink>
+                    <div style={{ position: 'relative' }}>
+                        <NavLink href="/network">Network</NavLink>
+                        {user && <PendingRequestsDot userId={user.id} />}
+                    </div>
                     <NavLink href="/scholarships">Scholarships</NavLink>
                     <NavLink href="/opportunities">Plays</NavLink>
                     <div style={{ position: 'relative' }}>
@@ -67,6 +70,21 @@ async function UnreadDot({ userId }: { userId: string }) {
         .select('*', { count: 'exact', head: true })
         .eq('receiver_id', userId)
         .eq('is_read', false);
+
+    if (!count || count === 0) return null;
+
+    return (
+        <div className={styles.unreadDot} />
+    );
+}
+
+async function PendingRequestsDot({ userId }: { userId: string }) {
+    const supabase = await createClient();
+    const { count } = await supabase
+        .from('connections')
+        .select('*', { count: 'exact', head: true })
+        .eq('following_id', userId)
+        .eq('status', 'pending');
 
     if (!count || count === 0) return null;
 

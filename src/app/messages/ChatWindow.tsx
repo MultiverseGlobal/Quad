@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 interface Message {
     id: string;
     sender_id: string;
+    receiver_id: string;
     content: string;
     created_at: string;
 }
@@ -27,10 +28,6 @@ export default function ChatWindow({ receiverId, initialMessages, currentUserId 
     const supabase = createClient();
 
     useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-        }
-        
         // Mark initial unread messages as read
         const unreadIds = initialMessages
             .filter(m => (m as any).is_read === false && m.sender_id === receiverId)
@@ -40,6 +37,12 @@ export default function ChatWindow({ receiverId, initialMessages, currentUserId 
             markAsRead(unreadIds);
         }
     }, [initialMessages, receiverId]);
+
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     // Real-time subscription
     useEffect(() => {
@@ -51,14 +54,23 @@ export default function ChatWindow({ receiverId, initialMessages, currentUserId 
                     event: 'INSERT',
                     schema: 'public',
                     table: 'messages',
-                    filter: `or(and(sender_id.eq.${currentUserId},receiver_id.eq.${receiverId}),and(sender_id.eq.${receiverId},receiver_id.eq.${currentUserId}))`
                 },
                 (payload) => {
                     const newMessage = payload.new as Message;
-                    setMessages(prev => [...prev, newMessage]);
                     
-                    if (newMessage.sender_id === receiverId) {
-                        markAsRead([newMessage.id]);
+                    if (
+                        (newMessage.sender_id === currentUserId && newMessage.receiver_id === receiverId) ||
+                        (newMessage.sender_id === receiverId && newMessage.receiver_id === currentUserId)
+                    ) {
+                        setMessages(prev => {
+                            // Prevent duplicates if local state already has it (though usually inserted ids are new)
+                            if (prev.find(m => m.id === newMessage.id)) return prev;
+                            return [...prev, newMessage];
+                        });
+                        
+                        if (newMessage.sender_id === receiverId) {
+                            markAsRead([newMessage.id]);
+                        }
                     }
                 }
             )
